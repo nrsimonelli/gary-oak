@@ -10,6 +10,23 @@ export const THEMES = {
   DEFAULT: 'default-theme',
 } as const;
 
+export const RIVALS = [
+  { path: 'src/assets/rivals/garyblue.png', name: 'gary oak' },
+  { path: 'src/assets/rivals/lance.png', name: 'lance wataru' },
+  { path: 'src/assets/rivals/red.png', name: 'rival red' },
+  { path: 'src/assets/rivals/steven.png', name: 'steven stone' },
+  {
+    path: 'src/assets/rivals/wallace.png',
+    name: 'wallace mikuri',
+  },
+  {
+    path: 'src/assets/rivals/cynthia.png',
+    name: 'cynthia shirona',
+  },
+  { path: 'src/assets/rivals/alder.png', name: 'alder adeku' },
+  { path: 'src/assets/rivals/iris.png', name: 'iris of unova' },
+] as const;
+
 export const TYPES = [
   'normal',
   'fire',

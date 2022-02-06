@@ -1,20 +1,33 @@
-import { styled } from '../stitches.config';
+import { keyframes, styled } from '../stitches.config';
 
 export const Text = styled('span', {
   // local resets here
   display: 'block',
+  userSelect: 'none',
 
   variants: {
     variant: {
       title: {
-        fontSize: '$7',
+        fontSize: '$6',
         fontWeight: '$3',
         lineHeight: '$2',
+        '@bp1': {
+          fontSize: '$7',
+        },
+        '@bp3': {
+          fontSize: '$8',
+        },
       },
       h1: {
-        fontSize: '$6',
+        fontSize: '$5',
         fontWeight: '$2',
         lineHeight: '$2',
+        '@bp1': {
+          fontSize: '$6',
+        },
+        '@bp3': {
+          fontSize: '$7',
+        },
       },
       h2: {
         fontSize: '$5',
@@ -112,6 +125,20 @@ export const Text = styled('span', {
   defaultVariants: {
     variant: 'default',
   },
+});
+
+const fade = keyframes({
+  '0%': { opacity: 0 },
+  '35%': { opacity: '100%' },
+  '65%': { opacity: '100%' },
+  '100%': { opacity: 0 },
+});
+
+export const RivalName = styled(Text, {
+  animationName: `${fade}`,
+  animationDuration: '3000ms',
+  animationIterationCount: 0,
+  animationTimingFunction: 'ease',
 });
 
 export const Tag = styled(Text, {

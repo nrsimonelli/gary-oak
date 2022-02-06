@@ -18,10 +18,6 @@ export const globalStyles = globalCss({
   },
   a: {
     color: 'inherit',
-    textDecoration: 'none',
-    '&:hover': {
-      color: '$sky11',
-      textDecoration: 'underline',
-    },
+    textDecoration: 'inherit',
   },
 });

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Box } from '../../components/Box';
 import { Container } from '../../components/Container';
 import { Flex } from '../../components/Flex';
@@ -15,7 +16,14 @@ const PokedexNav = () => {
         <Box>
           <Text variant={'title'}>Living Pokedex</Text>
         </Box>
-        <ThemeToggle />
+        <Flex align={'center'} justify={'end'} css={{ flex: '1' }}>
+          <Text
+            css={{ pr: '$3', '&:hover': { color: '$loContrast' } }}
+          >
+            <Link to='/'>Home</Link>
+          </Text>
+          <ThemeToggle />
+        </Flex>
       </Flex>
     </Container>
   );

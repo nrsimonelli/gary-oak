@@ -7,7 +7,7 @@ import PokedexNav from './PokedexNav';
 
 const userData: any = [];
 let i = 1;
-while (i < 151) {
+while (i < 13) {
   if (TEAM_GARY.includes(i)) {
     userData.push({ id: i, caught: true });
   } else {
