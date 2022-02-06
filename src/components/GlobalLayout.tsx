@@ -11,7 +11,7 @@ export const GlobalLayout = () => {
         width: '100%',
         height: '$vh',
         backgroundImage:
-          'linear-gradient(19deg, $colors$slate3 0%, $colors$slate6 100%)',
+          'linear-gradient(19deg, $colors$appBg4 0%, $colors$appBg3 100%)',
         overflowY: 'auto',
       }}
     >

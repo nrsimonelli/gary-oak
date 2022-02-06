@@ -5,6 +5,11 @@ export const SCREENS = {
   4: '1280px',
 } as const;
 
+export const THEMES = {
+  DARK: 'dark-theme',
+  DEFAULT: 'default-theme',
+} as const;
+
 export const TYPES = [
   'normal',
   'fire',

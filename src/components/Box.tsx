@@ -40,11 +40,10 @@ export const PokemonContainer = styled(Box, {
     isCaught: {
       true: {
         backgroundImage:
-          // 'linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)',
-          'linear-gradient(145deg, $colors$sky9 0%, $colors$indigo11 100%)',
+          'linear-gradient(145deg, $colors$stop1 0%, $colors$stop2 100%)',
       },
       false: {
-        background: '$slate1',
+        background: '$appBg1',
       },
     },
   },

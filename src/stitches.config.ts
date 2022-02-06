@@ -27,6 +27,30 @@ import {
   gray,
   gold,
   bronze,
+  amberDark,
+  blueDark,
+  bronzeDark,
+  brownDark,
+  crimsonDark,
+  cyanDark,
+  goldDark,
+  grassDark,
+  grayDark,
+  greenDark,
+  indigoDark,
+  limeDark,
+  mintDark,
+  orangeDark,
+  pinkDark,
+  plumDark,
+  purpleDark,
+  redDark,
+  skyDark,
+  slateDark,
+  tealDark,
+  tomatoDark,
+  violetDark,
+  yellowDark,
 } from '@radix-ui/colors';
 import { SCREENS } from './constants';
 
@@ -40,9 +64,9 @@ export const {
 } = createStitches({
   theme: {
     colors: {
-      ...slate,
       ...blackA,
       ...whiteA,
+      ...slate,
       ...red,
       ...blue,
       ...yellow,
@@ -66,6 +90,20 @@ export const {
       ...indigo,
       ...cyan,
       ...mint,
+
+      appBg1: '$slate1',
+      appBg2: '$slate2',
+      appBg3: '$slate3',
+      appBg4: '$slate4',
+
+      hiContrast: '$slate12',
+      loContrast: '$slate11',
+      inverse: '$slate1',
+
+      stop1: '$sky9',
+      stop2: '$indigo11',
+      stop3: '$slate3',
+      stop4: '$slate6',
     },
     space: {
       0: 0,
@@ -208,5 +246,50 @@ export const {
       height: value,
       width: value,
     }),
+  },
+});
+
+export const darkTheme = createTheme('dark-theme', {
+  colors: {
+    ...blackA,
+    ...whiteA,
+    ...slateDark,
+    ...redDark,
+    ...blueDark,
+    ...yellowDark,
+    ...greenDark,
+    ...goldDark,
+    ...grayDark,
+    ...bronzeDark,
+    ...amberDark,
+    ...tomatoDark,
+    ...tealDark,
+    ...grassDark,
+    ...orangeDark,
+    ...limeDark,
+    ...skyDark,
+    ...brownDark,
+    ...purpleDark,
+    ...pinkDark,
+    ...crimsonDark,
+    ...plumDark,
+    ...violetDark,
+    ...indigoDark,
+    ...cyanDark,
+    ...mintDark,
+
+    appBg1: '$slate4',
+    appBg2: '$slate3',
+    appBg3: '$slate2',
+    appBg4: '$slate1',
+
+    hiContrast: '$slate12',
+    loContrast: '$slate11',
+    inverse: '$slate1',
+
+    stop1: '$indigo9',
+    stop2: '$sky11',
+    stop3: '$slate1',
+    stop4: '$slate3',
   },
 });

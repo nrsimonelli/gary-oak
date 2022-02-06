@@ -24,7 +24,7 @@ const Pokedex = () => {
       <PokedexNav />
       <Container
         variant={'responsive'}
-        css={{ py: '$3', bg: '$slate2', borderRadius: '$3' }}
+        css={{ py: '$3', bg: '$appBg2', borderRadius: '$3' }}
       >
         <Flex wrap={'wrap'}>
           {userDex.map((mon: { id: number; caught: boolean }) => (

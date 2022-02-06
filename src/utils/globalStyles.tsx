@@ -13,8 +13,8 @@ export const globalStyles = globalCss({
     fontFamily: '$untitled',
     lineHeight: '$3',
     fontWeight: '$1',
-    bg: '$slate2',
-    color: '$slate12',
+    bg: '$appBg3',
+    color: '$hiContrast',
   },
   a: {
     color: 'inherit',
