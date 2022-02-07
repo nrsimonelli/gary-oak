@@ -13,6 +13,8 @@ const fade = keyframes({
 });
 
 export const SpriteImg = styled(Img, {
+  height: '95%',
+  // might use this fade animation later, right now iteration set to 0 so it will not run
   objectFit: 'scale-down',
   animationName: `${fade}`,
   animationDuration: '3000ms',

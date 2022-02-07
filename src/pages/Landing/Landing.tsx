@@ -7,6 +7,8 @@ import { Button } from '../../components/Button';
 import { Link } from 'react-router-dom';
 import { RIVALS } from '../../constants';
 import { SpriteImg } from '../../components/Img';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
+import { changeRival } from '../../redux/rivalStats/rival-slice';
 
 interface RivalT {
   path: string;
@@ -14,51 +16,53 @@ interface RivalT {
 }
 
 const Landing = () => {
+  const rival = useAppSelector((state) => state.rival);
+  const dispatch = useAppDispatch();
+
   const [badges, setBadges] = useState<number>(0);
   const [pokemon, setPokemon] = useState<number>(0);
   const [victories, setVictories] = useState<number>(0);
   const [sprite, setSprite] = useState<RivalT>(RIVALS[0]);
   const [spriteIndex, setSpriteIndex] = useState<number>(0);
 
-  // Change rival index by interval
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setSpriteIndex((i) => (i + 1) % RIVALS.length);
-  //   }, 3000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
   // Respond to change in index with new sprite
   useEffect(() => {
-    setSprite(RIVALS[spriteIndex]);
+    dispatch(changeRival(RIVALS[spriteIndex]));
   }, [spriteIndex]);
 
   useEffect(() => {
-    if (badges <= 7) {
+    if (badges < rival.badges) {
       const interval = setInterval(() => {
-        setBadges(badges + 1);
+        setBadges((i) => i + 1);
       }, 300);
       return () => clearInterval(interval);
     }
   }, [badges]);
 
   useEffect(() => {
-    if (pokemon <= 15) {
+    if (pokemon < rival.pokemon) {
       const interval = setInterval(() => {
-        setPokemon(pokemon + 1);
-      }, 200);
+        setPokemon((i) => i + 1);
+      }, 100);
       return () => clearInterval(interval);
     }
   }, [pokemon]);
 
   useEffect(() => {
-    if (victories <= 127) {
+    if (victories <= rival.victories) {
       const interval = setInterval(() => {
         setVictories(victories + 1);
-      }, 28);
+      }, 30);
       return () => clearInterval(interval);
     }
   }, [victories]);
+
+  const handleRivalChange = () => {
+    setSpriteIndex((i) => (i + 1) % RIVALS.length);
+    setBadges(0);
+    setPokemon(0);
+    setVictories(0);
+  };
 
   return (
     <Container variant={'responsive'} css={{ height: '$full' }}>
@@ -79,7 +83,7 @@ const Landing = () => {
           }}
         >
           <RivalName variant={'title'} case={'capitalize'}>
-            {sprite.name},
+            {rival.name},
           </RivalName>
           <Text variant={'h1'} css={{ mt: '$1' }}>
             Pokemon Master
@@ -100,8 +104,9 @@ const Landing = () => {
                 height: '100%',
                 textAlign: 'center',
               }}
+              onClick={() => handleRivalChange()}
             >
-              <SpriteImg src={sprite.path} />
+              <SpriteImg src={rival.path} />
             </Box>
           </Flex>
           <Flex
