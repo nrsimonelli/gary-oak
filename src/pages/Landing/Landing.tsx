@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { RIVALS } from '../../constants';
 import { SpriteImg } from '../../components/Img';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
-import { changeRival } from '../../redux/rivalStats/rival-slice';
+import { changeRival } from '../../redux/slice/rival-slice';
 
 interface RivalT {
   path: string;
@@ -22,13 +22,6 @@ const Landing = () => {
   const [badges, setBadges] = useState<number>(0);
   const [pokemon, setPokemon] = useState<number>(0);
   const [victories, setVictories] = useState<number>(0);
-  const [sprite, setSprite] = useState<RivalT>(RIVALS[0]);
-  const [spriteIndex, setSpriteIndex] = useState<number>(0);
-
-  // Respond to change in index with new sprite
-  useEffect(() => {
-    dispatch(changeRival(RIVALS[spriteIndex]));
-  }, [spriteIndex]);
 
   useEffect(() => {
     if (badges < rival.badges) {
@@ -58,10 +51,10 @@ const Landing = () => {
   }, [victories]);
 
   const handleRivalChange = () => {
-    setSpriteIndex((i) => (i + 1) % RIVALS.length);
     setBadges(0);
     setPokemon(0);
     setVictories(0);
+    dispatch(changeRival());
   };
 
   return (

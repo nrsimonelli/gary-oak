@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { pokemonApiSlice } from './slice/pokemon-api';
-import rivalSlice from './rivalStats/rival-slice';
+import rivalSlice from './slice/rival-slice';
 
 export const store = configureStore({
   reducer: {

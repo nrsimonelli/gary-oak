@@ -21,8 +21,11 @@ const rivalSlice = createSlice({
   name: 'rival',
   initialState,
   reducers: {
-    changeRival(state, action: PayloadAction<RivalState>) {
-      return (state = action.payload);
+    changeRival(state) {
+      const rivalIndex =
+        (RIVALS.findIndex((rival) => rival.name === state.name) + 1) %
+        RIVALS.length;
+      return (state = RIVALS[rivalIndex]);
     },
   },
 });
