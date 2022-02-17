@@ -21,7 +21,7 @@ const rivalSlice = createSlice({
   name: 'rival',
   initialState,
   reducers: {
-    changeRival(state) {
+    changeRival(state): RivalState {
       const rivalIndex =
         (RIVALS.findIndex((rival) => rival.name === state.name) + 1) %
         RIVALS.length;

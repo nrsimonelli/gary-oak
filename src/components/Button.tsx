@@ -101,3 +101,31 @@ export const Button = styled('button', {
     },
   },
 });
+
+export const FilterButton = styled(Button, {
+  variants: {
+    isSelected: {
+      true: {
+        color: '$whiteA12',
+        backgroundColor: '$$bc9',
+        '&:hover': {
+          backgroundColor: '$$bc10',
+        },
+        '&:active': {
+          backgroundColor: '$$bc9',
+        },
+      },
+      false: {
+        bg: 'transparent',
+        color: '$$bc11',
+        boxShadow: 'inset 0 0 0 1px $$bc8',
+        '&:hover': {
+          boxShadow: 'inset 0 0 0 1px $$bc9',
+        },
+        '&:focus': {
+          boxShadow: 'inset 0 0 0 1px $$bc9, 0 0 0 1px $$bc9',
+        },
+      },
+    },
+  },
+});

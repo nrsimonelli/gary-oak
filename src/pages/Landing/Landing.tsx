@@ -5,7 +5,6 @@ import { Flex } from '../../components/Flex';
 import { RivalName, Text } from '../../components/Text';
 import { Button } from '../../components/Button';
 import { Link } from 'react-router-dom';
-import { RIVALS } from '../../constants';
 import { SpriteImg } from '../../components/Img';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { changeRival } from '../../redux/slice/rival-slice';
