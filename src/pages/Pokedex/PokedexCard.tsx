@@ -11,9 +11,14 @@ import { updateLoadingStates } from '../../redux/slice/pokedex-slice';
 interface PokeCardProps {
   pokemon: string;
   caught: boolean;
+  triggerToast: any;
 }
 
-const PokedexCard = ({ pokemon, caught }: PokeCardProps) => {
+const PokedexCard = ({
+  pokemon,
+  caught,
+  triggerToast,
+}: PokeCardProps) => {
   const dispatch = useAppDispatch();
   const { data, isFetching, isLoading, isError } =
     useGetPokemonByNameQuery(pokemon);
@@ -29,6 +34,15 @@ const PokedexCard = ({ pokemon, caught }: PokeCardProps) => {
     const cardStatus = { name: pokemon, status: isLoading };
     dispatch(updateLoadingStates({ cardStatus }));
   }, [isLoading]);
+
+  const handleClick = () => {
+    triggerToast({
+      open: true,
+      variant: isCaught ? 'error' : 'success',
+      pokemon: title,
+    });
+    setIsCaught(!isCaught);
+  };
 
   return (
     <>
@@ -66,7 +80,7 @@ const PokedexCard = ({ pokemon, caught }: PokeCardProps) => {
         <PokemonContainer
           isCaught={isCaught}
           p={'2'}
-          onClick={() => setIsCaught(!isCaught)}
+          onClick={handleClick}
           css={{ height: '238px', transition: 'all 300ms ease-out' }}
         >
           <Text case={'capitalize'}>{title}</Text>

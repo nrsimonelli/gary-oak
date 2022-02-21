@@ -1,15 +1,10 @@
-import {
-  Key,
-  MouseEvent,
-  MouseEventHandler,
-  useEffect,
-  useState,
-} from 'react';
+import { Key, MouseEvent, useEffect, useState } from 'react';
 import { Box } from '../../components/Box';
-import { Button, FilterButton } from '../../components/Button';
+import { FilterButton } from '../../components/Button';
 import { Container } from '../../components/Container';
 import { Flex } from '../../components/Flex';
-import { GenEnum, LIMIT_OFFSET, TEAM_GARY } from '../../constants';
+import { ToastRoot } from '../../components/ToastRoot';
+import { GenEnum, LIMIT_OFFSET } from '../../constants';
 import { getStoredPokemon } from '../../redux/slice/pokedex-slice';
 import { useGetAllPokemonQuery } from '../../redux/slice/pokemon-api';
 import { useAppSelector, useAppDispatch } from '../../utils/hooks';
@@ -28,9 +23,22 @@ const Pokedex = () => {
 
   const [queryOffset, setQueryOffset] = useState(0);
   const [currentData, setCurrentData] = useState([]);
+  // const [activeFilter, setActiveFilter] = useState(GenEnum.GEN_1);
   const [activeFilter, setActiveFilter] = useState(GenEnum.GEN_1);
-  const [maxOffset, setMaxOffset] = useState(activeFilter);
+  const [maxOffset, setMaxOffset] = useState(150);
   const [displayPokemon, setDisplayPokemon] = useState([]);
+
+  interface InitialToast {
+    open: boolean;
+    variant: 'success' | 'error';
+    pokemon: string;
+  }
+
+  const [toastState, setToastState] = useState<InitialToast>({
+    open: false,
+    variant: 'success',
+    pokemon: '',
+  });
 
   const { data, isFetching, isLoading } = useGetAllPokemonQuery<any>({
     limit: LIMIT_OFFSET,
@@ -83,12 +91,27 @@ const Pokedex = () => {
     }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setToastState((i) => ({ ...i, open: false }));
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [toastState.open]);
+
   const isGenOne = activeFilter === GenEnum.GEN_1;
   const isGenTwo = activeFilter === GenEnum.GEN_2;
   const isGenThree = activeFilter === GenEnum.GEN_3;
 
   return (
     <Flex direction={'column'} align={'center'} justify={'start'}>
+      <ToastRoot
+        type={toastState.variant}
+        pokemon={toastState.pokemon}
+        isVisible={toastState.open}
+      />
       <PokedexNav />
       <Container
         variant={'responsive'}
@@ -141,6 +164,7 @@ const Pokedex = () => {
               <PokedexCard
                 pokemon={mon.name}
                 caught={false}
+                triggerToast={setToastState}
                 key={index}
               />
             )
