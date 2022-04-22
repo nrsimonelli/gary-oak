@@ -8,66 +8,27 @@ export const SCREENS = {
 export const THEMES = {
   DARK: 'dark-theme',
   DEFAULT: 'default-theme',
+  BLUE: 'blue-theme',
+  GREEN: 'green-theme',
+  YELLOW: 'yellow-theme',
 } as const;
 
-export const RIVALS = [
+export const POKEBALL = [
   {
-    path: 'src/assets/rivals/garyblue.png',
-    name: 'gary oak',
-    badges: 8,
-    pokemon: 16,
-    victories: 127,
+    theme: THEMES.DEFAULT,
+    path: 'src/assets/themeIcons/red.png',
   },
+  { theme: THEMES.BLUE, path: 'src/assets/themeIcons/blue.png' },
   {
-    path: 'src/assets/rivals/lance.png',
-    name: 'lance wataru',
-    badges: 8,
-    pokemon: 22,
-    victories: 341,
+    theme: THEMES.GREEN,
+    path: 'src/assets/themeIcons/green.png',
   },
+  { theme: THEMES.DARK, path: 'src/assets/themeIcons/white.png' },
   {
-    path: 'src/assets/rivals/red.png',
-    name: 'rival red',
-    badges: 16,
-    pokemon: 126,
-    victories: 550,
+    theme: THEMES.YELLOW,
+    path: 'src/assets/themeIcons/gold.png',
   },
-  {
-    path: 'src/assets/rivals/steven.png',
-    name: 'steven stone',
-    badges: 12,
-    pokemon: 68,
-    victories: 495,
-  },
-  {
-    path: 'src/assets/rivals/wallace.png',
-    name: 'wallace mikuri',
-    badges: 16,
-    pokemon: 76,
-    victories: 757,
-  },
-  {
-    path: 'src/assets/rivals/cynthia.png',
-    name: 'cynthia shirona',
-    badges: 32,
-    pokemon: 9,
-    victories: 998,
-  },
-  {
-    path: 'src/assets/rivals/alder.png',
-    name: 'alder adeku',
-    badges: 16,
-    pokemon: 53,
-    victories: 158,
-  },
-  {
-    path: 'src/assets/rivals/iris.png',
-    name: 'iris of unova',
-    badges: 24,
-    pokemon: 101,
-    victories: 333,
-  },
-] as const;
+];
 
 export const TYPES = [
   'normal',
@@ -917,3 +878,148 @@ export const NEW_USER = [
   { name: 'meltan', isCaught: false },
   { name: 'melmetal', isCaught: false },
 ];
+
+export const GEN1_FILTER = NEW_USER.slice(0, GenEnum.GEN_1 - 1);
+export const GEN2_FILTER = NEW_USER.slice(GenEnum.GEN_1, GenEnum.GEN_2 - 1);
+export const GEN3_FILTER = NEW_USER.slice(GenEnum.GEN_2, GenEnum.GEN_3 - 1);
+
+export const RIVAL_LIST = [
+  {
+    name: 'blue',
+    path: 'src/assets/rivals/blue.webp',
+    pokemon: [
+      { id: 3, name: 'venusaur', isStarter: true },
+      { id: 18, name: 'pidgeot', isStarter: false },
+      { id: 59, name: 'arcanine', isStarter: true },
+      { id: 65, name: 'alakazam', isStarter: false },
+      { id: 103, name: 'exeggutor', isStarter: false },
+      { id: 112, name: 'rhydon', isStarter: false },
+      { id: 130, name: 'gyarados', isStarter: true },
+      { id: 135, name: 'jolteon', isStarter: false },
+      { id: 142, name: 'aerodactyl', isStarter: false },
+      { id: 214, name: 'heracross', isStarter: false },
+      { id: 248, name: 'tyranitar', isStarter: false },
+    ],
+  },
+  {
+    name: 'red',
+    path: 'src/assets/rivals/red.webp',
+    pokemon: [
+      { id: 3, name: 'venusaur', isStarter: false },
+      { id: 6, name: 'charizard', isStarter: true },
+      { id: 9, name: 'blastoise', isStarter: false },
+      { id: 25, name: 'pikachu', isStarter: true },
+      { id: 68, name: 'machamp', isStarter: false },
+      { id: 131, name: 'lapras', isStarter: true },
+      { id: 143, name: 'snorlax', isStarter: false },
+      { id: 196, name: 'espeon', isStarter: false },
+    ],
+  },
+  {
+    name: 'lance',
+    path: 'src/assets/rivals/lance.webp',
+    pokemon: [
+      { id: 6, name: 'charizard', isStarter: false },
+      { id: 130, name: 'gyarados', isStarter: true },
+      { id: 142, name: 'aerodactyl', isStarter: false },
+      { id: 148, name: 'dragonair', isStarter: false },
+      { id: 149, name: 'dragonite', isStarter: true },
+      { id: 230, name: 'kingdra', isStarter: false },
+      { id: 248, name: 'tyranitar', isStarter: false },
+      { id: 330, name: 'flygon', isStarter: false },
+      { id: 373, name: 'salamence', isStarter: false },
+      { id: 445, name: 'garchomp', isStarter: true },
+      { id: 612, name: 'haxorus', isStarter: false },
+      { id: 635, name: 'hydreigon', isStarter: false },
+    ],
+  },
+  {
+    name: 'panic',
+    path: 'src/assets/rivals/psychic.webp',
+    pokemon: [
+      { id: 80, name: 'slowbro', isStarter: true },
+      { id: 135, name: 'jolteon', isStarter: true },
+      { id: 212, name: 'scizor', isStarter: true },
+      { id: 257, name: 'blaziken', isStarter: false },
+      { id: 468, name: 'togekiss', isStarter: false },
+      { id: 887, name: 'dragapult', isStarter: false },
+    ],
+  },
+  {
+    name: 'giovanni',
+    path: 'src/assets/rivals/gio.webp',
+    pokemon: [
+      { id: 28, name: 'sandslash', isStarter: false },
+      { id: 31, name: 'nidoqueen', isStarter: true },
+      { id: 34, name: 'nidoking', isStarter: true },
+      { id: 53, name: 'persian', isStarter: false },
+      { id: 51, name: 'dugtrio', isStarter: false },
+      { id: 76, name: 'golem', isStarter: false },
+      { id: 105, name: 'marowak', isStarter: false },
+      { id: 112, name: 'rhydon', isStarter: true },
+      { id: 115, name: 'kangaskhan', isStarter: false },
+      { id: 430, name: 'honchkrow', isStarter: false },
+      { id: 445, name: 'garchomp', isStarter: false },
+      { id: 450, name: 'hippowdon', isStarter: false },
+      { id: 464, name: 'rhyperior', isStarter: false },
+      { id: 472, name: 'gliscor', isStarter: false },
+      { id: 553, name: 'krookodile', isStarter: false },
+    ],
+  },
+  {
+    name: 'simo',
+    path: 'src/assets/rivals/cool.webp',
+    pokemon: [
+      { id: 76, name: 'golem', isStarter: false },
+      { id: 94, name: 'gengar', isStarter: true },
+      { id: 101, name: 'electrode', isStarter: true },
+      { id: 128, name: 'tauros', isStarter: false },
+      { id: 136, name: 'flareon', isStarter: true },
+      { id: 148, name: 'dragonair', isStarter: false },
+      { id: 181, name: 'ampharos', isStarter: false },
+      { id: 214, name: 'heracross', isStarter: false },
+      { id: 248, name: 'tyranitar', isStarter: false },
+      { id: 330, name: 'flygon', isStarter: false },
+      { id: 450, name: 'hippowdon', isStarter: false },
+    ],
+  },
+  {
+    name: 'byers',
+    path: 'src/assets/rivals/acef.webp',
+    pokemon: [
+      { id: 38, name: 'ninetales', isStarter: true },
+      { id: 39, name: 'jigglypuff', isStarter: false },
+      { id: 114, name: 'tangela', isStarter: true },
+      { id: 130, name: 'gyarados', isStarter: false },
+      { id: 132, name: 'ditto', isStarter: false },
+      { id: 134, name: 'vaporeon', isStarter: false },
+      { id: 175, name: 'togepi', isStarter: true },
+      { id: 726, name: 'torracat', isStarter: false },
+    ],
+  },
+  {
+    name: 'kautz',
+    path: 'src/assets/rivals/hiker.webp',
+    pokemon: [
+      { id: 7, name: 'squirtle', isStarter: true },
+      { id: 137, name: 'porygon', isStarter: true },
+      { id: 151, name: 'mew', isStarter: true },
+      { id: 158, name: 'totodile', isStarter: false },
+      { id: 206, name: 'dunsparce', isStarter: false },
+      { id: 235, name: 'smeargle', isStarter: false },
+      { id: 241, name: 'miltank', isStarter: false },
+      { id: 251, name: 'celebi', isStarter: false },
+      { id: 350, name: 'milotic', isStarter: false },
+      { id: 385, name: 'jirachi', isStarter: false },
+    ],
+  },
+];
+
+export const STAT_MAX = {
+  Hp: 255,
+  Atk: 190,
+  Def: 250,
+  SpA: 194,
+  SpD: 250,
+  Speed: 200,
+};
