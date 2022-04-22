@@ -1,4 +1,6 @@
 import { styled, keyframes } from '../stitches.config';
+import { Box } from './Box';
+import { Flex } from './Flex';
 
 const pulse = keyframes({
   '0%': { opacity: 0 },
@@ -57,9 +59,41 @@ export const Skeleton = styled('div', {
         height: '163px',
         borderRadius: '50%',
       },
+      spriteContainer: {
+        borderRadius: '$3',
+        boxShadow: '$1',
+        height: '120px',
+        width: '120px',
+        p: '$3',
+      },
+      spriteImage: {
+        height: '50%',
+        width: '90%',
+      },
     },
   },
   defaultVariants: {
     variant: 'text',
   },
 });
+
+export const PokedexSkeleton = () => {
+  return (
+    <Box
+      css={{
+        padding: '$2',
+        borderRadius: '$3',
+        mb: '$3',
+        mx: 'auto',
+        boxShadow: '$3',
+      }}
+    >
+      <Skeleton variant={'title'} />
+      <Flex justify={'between'} css={{ mb: '$3' }}>
+        <Skeleton variant={'text1'} />
+        <Skeleton variant={'text2'} />
+      </Flex>
+      <Skeleton variant={'avatar1'} />
+    </Box>
+  );
+};

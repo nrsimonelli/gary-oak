@@ -31,13 +31,9 @@ export const PokemonContainer = styled(Box, {
   mb: '$3',
   mx: 'auto',
   boxShadow: '$2',
-  '&:hover': {
-    transform: 'translateY(-4px)',
-    boxShadow: '$3',
-  },
 
   variants: {
-    isCaught: {
+    isFeatured: {
       true: {
         backgroundImage:
           'linear-gradient(145deg, $colors$stop1 0%, $colors$stop2 100%)',

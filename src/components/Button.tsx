@@ -21,26 +21,24 @@ export const Button = styled('button', {
   px: '20px',
 
   '&:disabled': {
-    backgroundColor: '$slate2',
-    boxShadow: 'inset 0 0 0 1px $colors$slate7',
-    color: '$slate8',
     pointerEvents: 'none',
   },
 
   // locally scoped colors for easy variants
-  $$bc4: '$colors$violet4',
-  $$bc5: '$colors$violet5',
-  $$bc6: '$colors$violet6',
-  $$bc7: '$colors$violet7',
-  $$bc8: '$colors$violet8',
-  $$bc9: '$colors$violet9',
-  $$bc10: '$colors$violet10',
-  $$bc11: '$colors$violet11',
+  $$bc4: '$colors$primary4',
+  $$bc5: '$colors$primary5',
+  $$bc6: '$colors$primary6',
+  $$bc7: '$colors$primary7',
+  $$bc8: '$colors$primary8',
+  $$bc9: '$colors$primary9',
+  $$bc10: '$colors$primary10',
+  $$bc11: '$colors$primary11',
+  $$bc12: '$colors$primary12',
 
   variants: {
     variant: {
       primary: {
-        color: '$white',
+        color: '$inverse',
         backgroundColor: '$$bc9',
         '&:hover': {
           backgroundColor: '$$bc10',
@@ -106,7 +104,7 @@ export const FilterButton = styled(Button, {
   variants: {
     isSelected: {
       true: {
-        color: '$whiteA12',
+        color: '$inverse',
         backgroundColor: '$$bc9',
         '&:hover': {
           backgroundColor: '$$bc10',
