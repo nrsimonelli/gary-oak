@@ -1,20 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RIVALS } from '../../constants';
+import { RIVAL_LIST } from '../../constants';
 
 interface RivalState {
   name: string;
-  badges: number;
-  pokemon: number;
-  victories: number;
   path: string;
+  pokemon: { name: string; isStarter: boolean }[];
 }
 
 const initialState: RivalState = {
-  name: 'gary oak',
-  badges: 8,
-  pokemon: 16,
-  victories: 127,
-  path: 'src/assets/rivals/garyblue.png',
+  name: 'red',
+  path: 'src/assets/rivals/red.png',
+  pokemon: [],
 };
 
 const rivalSlice = createSlice({
@@ -23,9 +19,10 @@ const rivalSlice = createSlice({
   reducers: {
     changeRival(state): RivalState {
       const rivalIndex =
-        (RIVALS.findIndex((rival) => rival.name === state.name) + 1) %
-        RIVALS.length;
-      return (state = RIVALS[rivalIndex]);
+        (RIVAL_LIST.findIndex((rival) => rival.name === state.name) +
+          1) %
+        RIVAL_LIST.length;
+      return (state = RIVAL_LIST[rivalIndex]);
     },
   },
 });

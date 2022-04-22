@@ -1,12 +1,4 @@
-import {
-  createApi,
-  fetchBaseQuery,
-} from '@reduxjs/toolkit/query/react';
-
-interface Pokedex {
-  name: string;
-  url: string;
-}
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const pokemonApiSlice = createApi({
   reducerPath: 'api',
@@ -15,8 +7,7 @@ export const pokemonApiSlice = createApi({
   }),
   endpoints: (builder) => ({
     getAllPokemon: builder.query<any[], any>({
-      query: ({ limit, offset }) =>
-        `pokemon/?limit=${limit}&offset=${offset}`,
+      query: ({ limit, offset }) => `pokemon/?limit=${limit}&offset=${offset}`,
       transformResponse: (response: any) => response.results,
     }),
     getPokemonByName: builder.query({
