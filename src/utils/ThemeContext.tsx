@@ -1,5 +1,10 @@
 import { createContext, useEffect, FC, useState } from 'react';
-import { darkTheme } from '../stitches.config';
+import {
+  darkTheme,
+  yellowTheme,
+  blueTheme,
+  greenTheme,
+} from '../stitches.config';
 
 const getInitialTheme = () => {
   if (typeof window !== 'undefined' && window.localStorage) {
@@ -41,7 +46,14 @@ export const ThemeProvider: FC<ProviderContent> = ({
 
   const rawSetTheme = (rawTheme: string) => {
     if (rawTheme) {
-      document.body.classList.remove(darkTheme, 'default-theme');
+      // all themes here
+      document.body.classList.remove(
+        darkTheme,
+        yellowTheme,
+        blueTheme,
+        greenTheme,
+        'default-theme'
+      );
     }
 
     document.body.classList.add(rawTheme);

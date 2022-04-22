@@ -1,34 +1,37 @@
-import { useContext } from 'react';
-import { THEMES } from '../constants';
+import { useContext, useState } from 'react';
+import { POKEBALL } from '../constants';
 import { ThemeContext } from '../utils/ThemeContext';
-import { Box } from './Box';
 import { Flex } from './Flex';
+import { Img } from './Img';
 
 export const ThemeToggle = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
-  const isDark = theme === THEMES.DARK;
+  const trueBall = POKEBALL.findIndex((x) => x.theme === theme) ?? 0;
+  const fallback = POKEBALL[0].path;
+
+  const [ball, setBall] = useState(() => POKEBALL[trueBall].path);
 
   const switchTheme = () => {
-    isDark ? setTheme(THEMES.DEFAULT) : setTheme(THEMES.DARK);
+    const nextIndex =
+      (POKEBALL.findIndex((x) => x.theme === theme) + 1) %
+      POKEBALL.length;
+    setTheme(POKEBALL[nextIndex].theme);
+    setBall(POKEBALL[nextIndex].path);
   };
 
   return (
-    <Flex onClick={switchTheme}>
-      <svg
-        width='30'
-        height='30'
-        viewBox='0 0 15 15'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
-      >
-        <path
-          d='M7.49991 0.876892C3.84222 0.876892 0.877075 3.84204 0.877075 7.49972C0.877075 11.1574 3.84222 14.1226 7.49991 14.1226C11.1576 14.1226 14.1227 11.1574 14.1227 7.49972C14.1227 3.84204 11.1576 0.876892 7.49991 0.876892ZM7.49988 1.82689C4.36688 1.8269 1.82707 4.36672 1.82707 7.49972C1.82707 10.6327 4.36688 13.1725 7.49988 13.1726V1.82689Z'
-          fill='currentColor'
-          fillRule='evenodd'
-          clipRule='evenodd'
-        ></path>
-      </svg>
+    <Flex
+      onClick={switchTheme}
+      css={{
+        borderRadius: '$5',
+        flexShrink: 0,
+      }}
+    >
+      <Img
+        css={{ height: 'auto', width: 120 }}
+        src={ball ?? fallback}
+      />
     </Flex>
   );
 };
