@@ -1,47 +1,63 @@
-import { styled } from '../../stitches.config';
 import { useEffect, useState } from 'react';
 import { Box, PokemonContainer } from '../../components/Box';
 import { Flex } from '../../components/Flex';
 import { Tag, Text } from '../../components/Text';
 import { useGetPokemonByNameQuery } from '../../redux/slice/pokemon-api';
-import PokedexSkeleton from './PokedexSkeleton';
-import { useAppDispatch } from '../../utils/hooks';
-import { updateLoadingStates } from '../../redux/slice/pokedex-slice';
+import { PokedexSkeleton } from '../../components/Skeleton';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
+import {
+  removeFeaturedPokemon,
+  setFeaturedPokemon,
+} from '../../redux/slice/pokedex-slice';
+import { Img } from '../../components/Img';
 
 interface PokeCardProps {
   pokemon: string;
-  caught: boolean;
-  triggerToast: any;
+  isStarter: boolean;
 }
 
-const PokedexCard = ({
-  pokemon,
-  caught,
-  triggerToast,
-}: PokeCardProps) => {
+const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
   const dispatch = useAppDispatch();
   const { data, isFetching, isLoading, isError } =
     useGetPokemonByNameQuery(pokemon);
-  const [isCaught, setIsCaught] = useState(() => caught);
+  const [isFeatured, setIsFeatured] = useState(false);
+  const featureList = useAppSelector((state) => state.pokedex.featuredPokemon);
 
   const title = data?.name;
-  const visual =
-    data?.sprites.other['official-artwork'].front_default;
+  const visual = data?.sprite;
+  // is the pokemon currently in the featured list?
+  const shouldRemove = featureList.some(
+    (pokemon: { name: string }) => pokemon.name === data?.name
+  );
 
-  const Image = styled('img', {});
+  // make sure state matches when data changes
+  useEffect(() => {
+    if (isStarter !== isFeatured) {
+      setIsFeatured(isStarter);
+    }
+  }, [isStarter, data, isLoading]);
 
   useEffect(() => {
-    const cardStatus = { name: pokemon, status: isLoading };
-    dispatch(updateLoadingStates({ cardStatus }));
-  }, [isLoading]);
+    if (isFetching) {
+      return;
+    }
+    if (!isFeatured && shouldRemove) {
+      dispatch(removeFeaturedPokemon({ data }));
+    }
+    if (isFeatured && data) {
+      dispatch(setFeaturedPokemon({ data }));
+    }
+  }, [isFeatured, isFetching]);
+
+  // makes sure the card is changed to inactive if pushed out of the feature list
+  useEffect(() => {
+    if (isFeatured && !shouldRemove) {
+      setIsFeatured(!isFeatured);
+    }
+  }, [featureList]);
 
   const handleClick = () => {
-    triggerToast({
-      open: true,
-      variant: isCaught ? 'error' : 'success',
-      pokemon: title,
-    });
-    setIsCaught(!isCaught);
+    setIsFeatured(!isFeatured);
   };
 
   return (
@@ -70,24 +86,24 @@ const PokedexCard = ({
             </Flex>
           </Flex>
           <Box css={{ borderRadius: '$3' }}>
-            <Image
-              src={'src/assets/error.png'}
-              css={{ width: '163px' }}
-            />
+            <Img src={'src/assets/error.png'} css={{ width: '163px' }} />
           </Box>
         </PokemonContainer>
       ) : (
         <PokemonContainer
-          isCaught={isCaught}
+          isFeatured={isFeatured}
           p={'2'}
           onClick={handleClick}
-          css={{ height: '238px', transition: 'all 300ms ease-out' }}
+          css={{
+            height: '238px',
+            transition: 'all 300ms ease-out',
+          }}
         >
           <Text case={'capitalize'}>{title}</Text>
           <Flex justify={'between'}>
             <Text size={1}>#{data?.id}</Text>
             <Flex>
-              {data.types.map((x: any) => (
+              {data?.types.map((x: any) => (
                 <Tag
                   key={x.type.name}
                   size={1}
@@ -103,7 +119,7 @@ const PokedexCard = ({
             </Flex>
           </Flex>
           <Box css={{ borderRadius: '$3' }}>
-            <Image src={visual} css={{ width: '163px' }} />
+            <Img src={visual} css={{ width: '163px' }} />
           </Box>
         </PokemonContainer>
       )}
@@ -111,4 +127,4 @@ const PokedexCard = ({
   );
 };
 
-export default PokedexCard;
+export default PokemonCard;

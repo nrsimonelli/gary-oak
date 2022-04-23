@@ -23,7 +23,7 @@ const Unknown = () => {
           right: 0,
           bottom: 0,
           left: 0,
-          opacity: '.5',
+          opacity: '.3',
         },
       }}
     >
@@ -38,6 +38,9 @@ const Unknown = () => {
       >
         404
       </Text>
+      <Text variant={'h3'} css={{ zIndex: '$1', mb: '$3' }}>
+        Oh no! That page is unknown to us
+      </Text>
       <Text variant={'h3'} css={{ zIndex: '$1', mb: '$6' }}>
         Please try again
       </Text>
@@ -48,7 +51,7 @@ const Unknown = () => {
             size={'2'}
             shape={'2'}
             css={{
-              color: 'white',
+              color: '$inverse',
             }}
           >
             Home

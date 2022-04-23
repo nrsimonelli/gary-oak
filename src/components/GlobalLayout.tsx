@@ -13,6 +13,7 @@ export const GlobalLayout = () => {
         backgroundImage:
           'linear-gradient(19deg, $colors$appBg4 0%, $colors$appBg3 100%)',
         overflowY: 'auto',
+        scrollBehavior: 'smooth',
       }}
     >
       <Outlet />

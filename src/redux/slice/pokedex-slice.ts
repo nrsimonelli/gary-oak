@@ -2,37 +2,43 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // add interface later
 const initialState: any = {
-  pokedex: [],
-  data: [],
-  loadingStates: [],
+  featuredPokemon: [],
 };
 
 const pokedexSlice = createSlice({
   name: 'pokedex',
   initialState,
   reducers: {
-    // will type later
-    getStoredPokemon(state, action) {
-      const { currentData } = action.payload;
-      state.pokedex = currentData;
-      state.data = [...currentData];
-    },
-    updateLoadingStates(state, action) {
-      const { cardStatus } = action.payload;
-      const pokemonName = cardStatus.name;
-      const matchingEntry = state.loadingStates.findIndex(
-        (x: { name: string }) => x.name === pokemonName
-      );
-
-      if (matchingEntry >= 0) {
-        state.loadingStates[matchingEntry] = cardStatus;
-      } else {
-        state.loadingStates.push(cardStatus);
+    setFeaturedPokemon(state, action) {
+      const { data } = action.payload;
+      const array = state.featuredPokemon;
+      if (array.length === 3) {
+        array.shift();
+        array.push(data);
       }
+      if (!array.length || array.length < 3) {
+        array.push(data);
+      }
+    },
+    removeFeaturedPokemon(state, action) {
+      const { data } = action.payload;
+      const array = state.featuredPokemon;
+      const targetIndex = array.findIndex(
+        (pokemon: { name: string }) => pokemon.name === data.name
+      );
+      if (targetIndex >= 0) {
+        array.splice(targetIndex, 1);
+      }
+    },
+    clearFeaturedPokemon(state) {
+      state.featuredPokemon = [];
     },
   },
 });
 
-export const { getStoredPokemon, updateLoadingStates } =
-  pokedexSlice.actions;
+export const {
+  setFeaturedPokemon,
+  removeFeaturedPokemon,
+  clearFeaturedPokemon,
+} = pokedexSlice.actions;
 export default pokedexSlice.reducer;
