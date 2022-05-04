@@ -55,9 +55,7 @@ export const RivalSelect = () => {
     <Flex direction={'column'} align={'center'} justify={'start'}>
       <Flex direction={'row'}>
         {isLoading ? (
-          <Skeleton variant={'spriteContainer'} css={{ my: '$5' }}>
-            <Skeleton variant={'spriteImage'} />
-          </Skeleton>
+          <Skeleton variant={'spriteContainer'} css={{ my: '$5' }} />
         ) : (
           <Img
             src={data?.path || 'src/assets/error.png'}

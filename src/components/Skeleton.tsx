@@ -8,7 +8,7 @@ const pulse = keyframes({
 });
 
 export const Skeleton = styled('div', {
-  backgroundColor: '$slate4',
+  backgroundColor: '$appBg4',
   position: 'relative',
   overflow: 'hidden',
 
@@ -18,7 +18,7 @@ export const Skeleton = styled('div', {
     animationDirection: 'alternate',
     animationIterationCount: 'infinite',
     animationTimingFunction: 'ease-in-out',
-    backgroundColor: '$slate6',
+    backgroundColor: '$appBg3',
     borderRadius: 'inherit',
     bottom: 0,
     content: '""',
@@ -65,10 +65,6 @@ export const Skeleton = styled('div', {
         height: '120px',
         width: '120px',
         p: '$3',
-      },
-      spriteImage: {
-        height: '50%',
-        width: '90%',
       },
     },
   },
