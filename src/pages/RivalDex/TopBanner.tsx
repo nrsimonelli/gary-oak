@@ -1,12 +1,9 @@
-import React from 'react';
-import { Text } from '../../components/Text';
 import { Container } from '../../components/Container';
 import { Flex } from '../../components/Flex';
-import RivalSelect from './RivalSelect';
+import { Text } from '../../components/Text';
 import { ThemeToggle } from '../../components/ThemeToggle';
-import { Button } from '../../components/Button';
 
-const MainNav = () => {
+export const TopBanner = () => {
   return (
     <Container variant={'responsive'} css={{ height: '60vh' }}>
       <Flex align={'center'} justify={'between'} css={{ height: '$full' }}>
@@ -23,31 +20,3 @@ const MainNav = () => {
     </Container>
   );
 };
-
-const Mono = () => {
-  return (
-    <>
-      <MainNav />
-      <Flex
-        direction={'row'}
-        justify={'center'}
-        align={'center'}
-        css={{ pb: '$5' }}
-      >
-        <a href='#team'>
-          <Button
-            variant={'primary'}
-            size={'2'}
-            shape={'2'}
-            css={{ textTransform: 'capitalize' }}
-          >
-            View Starters
-          </Button>
-        </a>
-      </Flex>
-      <RivalSelect />
-    </>
-  );
-};
-
-export default Mono;

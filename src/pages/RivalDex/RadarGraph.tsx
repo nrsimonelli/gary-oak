@@ -14,7 +14,7 @@ import { STAT_MAX } from '../../constants';
 import { useAppSelector } from '../../utils/hooks';
 import { theme } from '../../stitches.config';
 
-const RadarGraph = () => {
+export const RadarGraph = () => {
   const featuredPokemon = useAppSelector(
     (state) => state.pokedex.featuredPokemon
   );
@@ -115,5 +115,3 @@ const RadarGraph = () => {
     </Box>
   );
 };
-
-export default RadarGraph;

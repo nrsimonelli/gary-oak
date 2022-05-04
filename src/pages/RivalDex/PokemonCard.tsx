@@ -16,7 +16,7 @@ interface PokeCardProps {
   isStarter: boolean;
 }
 
-const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
+export const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
   const dispatch = useAppDispatch();
   const { data, isFetching, isLoading, isError } =
     useGetPokemonByNameQuery(pokemon);
@@ -60,35 +60,41 @@ const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
     setIsFeatured(!isFeatured);
   };
 
+  const ErrorCard = () => {
+    return (
+      <PokemonContainer
+        p={'2'}
+        css={{ height: '238px', transition: 'all 300ms ease-out' }}
+      >
+        <Text case={'capitalize'}>Mystery</Text>
+        <Flex justify={'between'}>
+          <Text size={1}>???</Text>
+          <Flex>
+            <Tag
+              size={1}
+              style={'ghost'}
+              css={{
+                px: '$2',
+                ml: '$1',
+              }}
+            >
+              unknown
+            </Tag>
+          </Flex>
+        </Flex>
+        <Box css={{ borderRadius: '$3' }}>
+          <Img src={'src/assets/error.png'} css={{ width: '163px' }} />
+        </Box>
+      </PokemonContainer>
+    );
+  };
+
   return (
     <>
       {isFetching || isLoading ? (
         <PokedexSkeleton />
       ) : isError ? (
-        <PokemonContainer
-          p={'2'}
-          css={{ height: '238px', transition: 'all 300ms ease-out' }}
-        >
-          <Text case={'capitalize'}>Mystery</Text>
-          <Flex justify={'between'}>
-            <Text size={1}>???</Text>
-            <Flex>
-              <Tag
-                size={1}
-                style={'ghost'}
-                css={{
-                  px: '$2',
-                  ml: '$1',
-                }}
-              >
-                unknown
-              </Tag>
-            </Flex>
-          </Flex>
-          <Box css={{ borderRadius: '$3' }}>
-            <Img src={'src/assets/error.png'} css={{ width: '163px' }} />
-          </Box>
-        </PokemonContainer>
+        <ErrorCard />
       ) : (
         <PokemonContainer
           isFeatured={isFeatured}
@@ -126,5 +132,3 @@ const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
     </>
   );
 };
-
-export default PokemonCard;

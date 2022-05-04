@@ -31,7 +31,13 @@ export const PokemonContainer = styled(Box, {
   mb: '$3',
   mx: 'auto',
   boxShadow: '$2',
-
+  '@bp2': {
+    // spacing for 3 per row
+    mx: 'calc((736px - (179px * 3)) / 6)',
+  },
+  '@bp3': {
+    mx: 'auto',
+  },
   variants: {
     isFeatured: {
       true: {

@@ -10,8 +10,8 @@ import { RIVAL_LIST } from '../../constants';
 import { clearFeaturedPokemon } from '../../redux/slice/pokedex-slice';
 import { useAppDispatch } from '../../utils/hooks';
 import { getInitialRival, persistCurrentRival } from '../../utils/rivalPersist';
-import PokemonCard from './PokemonCard';
-import RadarGraph from './RadarGraph';
+import { PokemonCard } from './PokemonCard';
+import { RadarGraph } from './RadarGraph';
 
 interface Rival {
   name: string;
@@ -23,7 +23,7 @@ interface Rival {
   }[];
 }
 
-const RivalSelect = () => {
+export const RivalSelect = () => {
   const dispatch = useAppDispatch();
   const [currentRival, setCurrentRival] = useState(() => getInitialRival());
   const [data, setData] = useState<any>();
@@ -72,7 +72,14 @@ const RivalSelect = () => {
       </Flex>
       <Container
         variant={'responsive'}
-        css={{ py: '$3', bg: '$appBg2', borderRadius: '$3' }}
+        css={{
+          py: '$3',
+          bg: '$appBg2',
+          borderRadius: '$3',
+          '@bp4': {
+            mb: '$3',
+          },
+        }}
       >
         <Flex wrap={'wrap'} id='team'>
           <Flex css={{ width: '$full' }}>
@@ -116,5 +123,3 @@ const RivalSelect = () => {
     </Flex>
   );
 };
-
-export default RivalSelect;
