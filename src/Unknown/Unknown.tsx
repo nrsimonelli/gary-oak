@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import { Box } from '../../components/Box';
-import { Button } from '../../components/Button';
-import { Flex } from '../../components/Flex';
-import { Text } from '../../components/Text';
+import { Link } from 'react-router-dom'
+import { Box } from '../components/Box'
+import { Button } from '../components/Button'
+import { Flex } from '../components/Flex'
+import { Text } from '../components/Text'
 
 const Unknown = () => {
   return (
@@ -59,7 +59,7 @@ const Unknown = () => {
         </Link>
       </Box>
     </Flex>
-  );
-};
+  )
+}
 
-export default Unknown;
+export default Unknown

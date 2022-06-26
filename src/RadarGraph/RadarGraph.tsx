@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   ResponsiveContainer,
   RadarChart,
@@ -8,16 +8,16 @@ import {
   Radar,
   Legend,
   Tooltip,
-} from 'recharts';
-import { Box } from '../../components/Box';
-import { STAT_MAX } from '../../constants';
-import { useAppSelector } from '../../utils/hooks';
-import { theme } from '../../stitches.config';
+} from 'recharts'
+import { Box } from '../components/Box'
+import { STAT_MAX } from '../constants'
+import { useAppSelector } from '../utils/hooks'
+import { theme } from '../stitches.config'
 
 export const RadarGraph = () => {
   const featuredPokemon = useAppSelector(
-    (state) => state.pokedex.featuredPokemon
-  );
+    (state) => state.display.featuredPokemon
+  )
 
   const test = [
     {
@@ -62,10 +62,10 @@ export const RadarGraph = () => {
       [featuredPokemon[2]?.name]: featuredPokemon[2]?.speed,
       max: STAT_MAX.Speed,
     },
-  ];
+  ]
 
   return (
-    <Box css={{ height: '200px', width: '300px' }}>
+    <Box css={{ height: '300px', width: '320px' }}>
       <ResponsiveContainer width='100%' height='100%'>
         <RadarChart cx='50%' cy='50%' outerRadius='80%' data={test}>
           <PolarGrid radialLines={false} stroke={`${theme.colors.slate7}`} />
@@ -77,6 +77,7 @@ export const RadarGraph = () => {
           />
           <PolarRadiusAxis tick={false} axisLine={false} />
           <Legend
+            // margin={{ top: 8 }}
             iconType={'line'}
             align={'center'}
             verticalAlign={'bottom'}
@@ -113,5 +114,5 @@ export const RadarGraph = () => {
         </RadarChart>
       </ResponsiveContainer>
     </Box>
-  );
-};
+  )
+}
