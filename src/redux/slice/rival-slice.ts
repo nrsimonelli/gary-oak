@@ -1,31 +1,34 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RIVAL_LIST } from '../../constants';
+import { createSlice } from '@reduxjs/toolkit'
+import { getAllData, Trainer } from '../../utils/docs'
+import { getInitialRival, persistCurrentRival } from '../../utils/localStorage'
 
-interface RivalState {
-  name: string;
-  path: string;
-  pokemon: { name: string; isStarter: boolean }[];
+interface State {
+  selectedRival: string
+  rivals: Trainer[]
 }
 
-const initialState: RivalState = {
-  name: 'red',
-  path: 'src/assets/rivals/red.png',
-  pokemon: [],
-};
+const initialRival = getInitialRival()
+const initialRivals = await getAllData()
+
+const initialState: State = {
+  selectedRival: initialRival,
+  rivals: initialRivals,
+}
 
 const rivalSlice = createSlice({
   name: 'rival',
   initialState,
   reducers: {
-    changeRival(state): RivalState {
-      const rivalIndex =
-        (RIVAL_LIST.findIndex((rival) => rival.name === state.name) +
-          1) %
-        RIVAL_LIST.length;
-      return (state = RIVAL_LIST[rivalIndex]);
+    setRival(state: State, action: { payload: { tag: string } }) {
+      const value = action.payload.tag
+      console.log('value', value)
+      if (state.rivals.find((rival) => rival.id === value)) {
+        persistCurrentRival(value)
+      }
+      state.selectedRival = value
     },
   },
-});
+})
 
-export const { changeRival } = rivalSlice.actions;
-export default rivalSlice.reducer;
+export const { setRival } = rivalSlice.actions
+export default rivalSlice.reducer

@@ -1,12 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Pokemon } from '../../types';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { Pokemon } from '../../types'
 
 const deserializePokemon = (data: Pokemon) => ({
   id: data.id,
   name: data.name,
-  sprite:
-    data.sprites.other['official-artwork']?.front_default ??
-    data.sprites?.front_default,
+  sprite: {
+    default: data.sprites?.front_default,
+    shiny: data.sprites?.front_shiny,
+    official: data.sprites.other['official-artwork']?.front_default,
+  },
   hp: data.stats[0].base_stat,
   attack: data.stats[1].base_stat,
   defense: data.stats[2].base_stat,
@@ -14,7 +16,7 @@ const deserializePokemon = (data: Pokemon) => ({
   ['special-defense']: data.stats[4].base_stat,
   speed: data.stats[5].base_stat,
   types: data.types,
-});
+})
 
 export const pokemonApiSlice = createApi({
   reducerPath: 'api',
@@ -28,11 +30,11 @@ export const pokemonApiSlice = createApi({
     }),
     getPokemonByName: builder.query({
       query: (value: string | number) => `pokemon/${value}`,
-      transformResponse: (response: any) => deserializePokemon(response),
+      transformResponse: (response: Pokemon) => deserializePokemon(response),
     }),
   }),
-});
+})
 
 // Export hooks for usage in functional components
 export const { useGetPokemonByNameQuery, useGetAllPokemonQuery } =
-  pokemonApiSlice;
+  pokemonApiSlice
