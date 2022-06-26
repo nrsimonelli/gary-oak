@@ -1,4 +1,4 @@
-import { globalCss } from '../stitches.config';
+import { globalCss } from '../stitches.config'
 
 export const globalStyles = globalCss({
   '*, *::before, *::after': {
@@ -20,4 +20,4 @@ export const globalStyles = globalCss({
     color: 'inherit',
     textDecoration: 'inherit',
   },
-});
+})
