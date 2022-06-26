@@ -1,31 +1,29 @@
-import { useContext, useState } from 'react';
-import { POKEBALL } from '../constants';
-import { ThemeContext } from '../utils/ThemeContext';
-import { Flex } from './Flex';
-import { Img } from './Img';
+import { useContext, useState } from 'react'
+import { POKEBALL } from '../constants'
+import { ThemeContext } from '../utils/ThemeContext'
+import { Flex } from './Flex'
+import { Img } from './Img'
 
 export const ThemeToggle = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext)
 
-  const trueBall = POKEBALL.findIndex((x) => x.theme === theme) ?? 0;
-  const fallback = POKEBALL[0].path;
+  const storedTheme = POKEBALL.findIndex((x) => x.theme === theme)
+  const fallback = POKEBALL[0].path
+  const initialThemeSetting =
+    storedTheme >= 0 ? POKEBALL[storedTheme].path : fallback
 
   const setInitialState = () => {
-    if (trueBall) {
-      return POKEBALL[trueBall].path;
-    } else {
-      return fallback;
-    }
-  };
+    return initialThemeSetting
+  }
 
-  const [ball, setBall] = useState(() => setInitialState());
+  const [ball, setBall] = useState(() => setInitialState())
 
   const switchTheme = () => {
     const nextIndex =
-      (POKEBALL.findIndex((x) => x.theme === theme) + 1) % POKEBALL.length;
-    setTheme(POKEBALL[nextIndex].theme);
-    setBall(POKEBALL[nextIndex].path);
-  };
+      (POKEBALL.findIndex((x) => x.theme === theme) + 1) % POKEBALL.length
+    setTheme(POKEBALL[nextIndex].theme)
+    setBall(POKEBALL[nextIndex].path)
+  }
 
   return (
     <Flex
@@ -37,5 +35,5 @@ export const ThemeToggle = () => {
     >
       <Img css={{ height: 'auto', width: 120 }} src={ball ?? fallback} />
     </Flex>
-  );
-};
+  )
+}
