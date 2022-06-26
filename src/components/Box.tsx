@@ -2,7 +2,6 @@ import { styled } from '../stitches.config';
 
 export const Box = styled('div', {
   // local resets here
-
   variants: {
     variant: {
       1: { maxWidth: '$bp1' },
@@ -49,4 +48,5 @@ export const PokemonContainer = styled(Box, {
       },
     },
   },
+  length: 0,
 });

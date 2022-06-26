@@ -1,4 +1,4 @@
-import { styled } from '../stitches.config';
+import { styled } from '../stitches.config'
 
 export const Button = styled('button', {
   // local resets here
@@ -20,10 +20,6 @@ export const Button = styled('button', {
   py: '12px',
   px: '20px',
 
-  '&:disabled': {
-    pointerEvents: 'none',
-  },
-
   // locally scoped colors for easy variants
   $$bc4: '$colors$primary4',
   $$bc5: '$colors$primary5',
@@ -34,6 +30,10 @@ export const Button = styled('button', {
   $$bc10: '$colors$primary10',
   $$bc11: '$colors$primary11',
   $$bc12: '$colors$primary12',
+
+  '&:disabled': {
+    pointerEvents: 'none',
+  },
 
   variants: {
     variant: {
@@ -98,7 +98,7 @@ export const Button = styled('button', {
       3: { fontSize: '$4' },
     },
   },
-});
+})
 
 export const FilterButton = styled(Button, {
   variants: {
@@ -126,4 +126,4 @@ export const FilterButton = styled(Button, {
       },
     },
   },
-});
+})
