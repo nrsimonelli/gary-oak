@@ -873,10 +873,20 @@ export const POKEMON_LIST = NEW_USER.map((x, index) => ({
 }))
 
 export const SPRITE_OPTIONS = [
-  { id: 0, path: 'src/assets/rivals/blue.png' },
-  { id: 1, path: 'src/assets/rivals/red.png' },
-  { id: 2, path: 'src/assets/rivals/lance.png' },
-  { id: 3, path: 'src/assets/rivals/steven.png' },
+  { id: 0, path: 'src/assets/spriteOptions/acefemale.png' },
+  { id: 1, path: 'src/assets/spriteOptions/acemale.png' },
+  { id: 2, path: 'src/assets/spriteOptions/colress.png' },
+  { id: 3, path: 'src/assets/spriteOptions/cyclemale.png' },
+  { id: 4, path: 'src/assets/spriteOptions/depot.png' },
+  { id: 5, path: 'src/assets/spriteOptions/doctorfemale.png' },
+  { id: 6, path: 'src/assets/spriteOptions/greenfemale.png' },
+  { id: 7, path: 'src/assets/spriteOptions/guitarist.png' },
+  { id: 8, path: 'src/assets/spriteOptions/parasol.png' },
+  { id: 9, path: 'src/assets/spriteOptions/rangermale.png' },
+  { id: 10, path: 'src/assets/spriteOptions/sabrina.png' },
+  { id: 11, path: 'src/assets/spriteOptions/vetfemale.png' },
+  { id: 12, path: 'src/assets/spriteOptions/vetmale.png' },
+  { id: 13, path: 'src/assets/spriteOptions/wake.png' },
 ] as const
 
 export const STAT_MAX = {
