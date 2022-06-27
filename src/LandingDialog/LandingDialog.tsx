@@ -13,13 +13,17 @@ import { setPlayer } from '../redux/slice/player-slice'
 import { updatePlayerData } from '../utils/docs'
 import { AuthContext } from '../utils/auth'
 import { Timestamp } from 'firebase/firestore'
+import { CharacterInput } from './CharacterInput'
+import { TeamInput } from './TeamInput'
+import { Navigation } from './Navigation'
+import { ConfirmInput } from './ConfirmInput'
 
 interface LandingDialogProps {
   open: boolean
   onOpenChange: () => void
 }
 
-interface SelectState {
+export interface SelectState {
   key: number
   id: number
   name: string | undefined
@@ -28,6 +32,7 @@ interface SelectState {
 export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
   const currentUser = useContext(AuthContext)
   const dispatch = useAppDispatch()
+  const [stage, setStage] = useState(0)
   const [selectedPokemon, setSelectedPokemon] = useState<SelectState[]>([
     { key: 0, id: 0, name: '' },
     { key: 1, id: 0, name: '' },
@@ -53,6 +58,17 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
   const handleOnOpenChange = () => {
     console.log('firing on Open Change')
     onOpenChange()
+  }
+
+  const handleChevronClick = (value: number) => {
+    const targetIndex = (spriteDisplay + value) % SPRITE_OPTIONS.length
+    const loop = SPRITE_OPTIONS.length - 1
+
+    if (targetIndex < 0) {
+      setSpriteDisplay(loop)
+    } else {
+      setSpriteDisplay(targetIndex)
+    }
   }
 
   const updatePokemon = (
@@ -85,16 +101,6 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
     ]
     setSelectedPokemon(updatedList)
     setAnimateKey(largestKey())
-  }
-  const handleChevronClick = (value: number) => {
-    const targetIndex = (spriteDisplay + value) % SPRITE_OPTIONS.length
-    const loop = SPRITE_OPTIONS.length - 1
-
-    if (targetIndex < 0) {
-      setSpriteDisplay(loop)
-    } else {
-      setSpriteDisplay(targetIndex)
-    }
   }
 
   const mySchema = z.object({
@@ -147,6 +153,14 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
     }
   }
 
+  const handleNext = () => {
+    setStage(stage + 1)
+  }
+
+  const handleBack = () => {
+    setStage(stage - 1)
+  }
+
   const isAddDisabled = selectedPokemon.length > 5
 
   return (
@@ -168,67 +182,38 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
             width: '$full',
           }}
         >
-          <Flex
-            direction={'column'}
-            justify={'between'}
-            align={'center'}
-            css={{ flex: '1 0 0' }}
-          >
-            <Flex direction={'row'} justify={'center'} align={'center'}>
-              <ChevronLeftIcon onClick={() => handleChevronClick(-1)} />
-              <Img
-                src={
-                  SPRITE_OPTIONS[spriteDisplay]?.path || 'src/assets/error.png'
-                }
-                css={{
-                  height: '120px',
-                  width: 'auto',
-                  my: '$3',
-                }}
-              />
-              <ChevronRightIcon onClick={() => handleChevronClick(1)} />
-            </Flex>
-            <Input
-              id='userName'
-              type='text'
-              placeholder={'Enter your name...'}
-              value={userName.value}
-              onChange={userName.onChange}
-              css={{ my: '$2' }}
+          {stage === 0 && (
+            <CharacterInput
+              handleChevronClick={handleChevronClick}
+              spriteDisplay={spriteDisplay}
+              userValue={userName.value}
+              userChange={userName.onChange}
             />
-          </Flex>
-          <Flex
-            direction={'column'}
-            justify={'center'}
-            css={{
-              flex: '1 0 0',
-              transition: 'all 300ms linear',
-            }}
-          >
-            {selectedPokemon.map((mon) => (
-              <SearchBar
-                key={mon.key}
-                targetValue={mon.key}
-                animateKey={animateKey}
-                initialValue={{ value: mon.id, label: mon.name }}
-                handleRemove={handleRemove}
-                updatePokemon={updatePokemon}
-                resetAnimateKey={setAnimateKey}
-              />
-            ))}
-          </Flex>
-          <Flex css={{ p: '$3' }}>
-            <Button
-              variant={'outline'}
-              disabled={isAddDisabled}
-              onClick={handleAdd}
-            >
-              Add Mon
-            </Button>
-            <Button variant={'primary'} onClick={handleSave}>
-              Save Team
-            </Button>
-          </Flex>
+          )}
+          {stage === 1 && (
+            <TeamInput
+              selectedPokemon={selectedPokemon}
+              animateKey={animateKey}
+              setAnimateKey={setAnimateKey}
+              handleRemove={handleRemove}
+              updatePokemon={updatePokemon}
+            />
+          )}
+          {stage === 2 && (
+            <ConfirmInput
+              spriteDisplay={spriteDisplay}
+              selectedPokemon={selectedPokemon}
+              playerName={userName.value}
+            />
+          )}
+          <Navigation
+            handleAdd={handleAdd}
+            handleSave={handleSave}
+            handleNext={handleNext}
+            handleBack={handleBack}
+            stage={stage}
+            isAddDisabled={isAddDisabled}
+          />
         </Flex>
       </DialogBody>
     </DialogRoot>
