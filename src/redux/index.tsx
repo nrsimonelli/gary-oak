@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import pokedexSlice from './slice/display-slice'
 import { pokemonApiSlice } from './slice/pokemon-api'
 import rivalSlice from './slice/rival-slice'
 import displaySlice from './slice/display-slice'

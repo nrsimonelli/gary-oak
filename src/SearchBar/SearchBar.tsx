@@ -102,6 +102,13 @@ export const SearchBar = ({
         : state.isFocused
         ? `${theme.colors.primary4}`
         : `${theme.colors.appBg2}`,
+      [`.yellow-theme &`]: {
+        backgroundColor: state.isSelected
+          ? `${theme.colors.primary9}`
+          : state.isFocused
+          ? `${theme.colors.blue8}`
+          : `${theme.colors.appBg2}`,
+      },
       padding: `${theme.space[2]}`,
     }),
     container: (provided: any) => ({
@@ -128,6 +135,28 @@ export const SearchBar = ({
     input: (provided: any) => ({
       ...provided,
       color: `${theme.colors.hiContrast}`,
+    }),
+    placeholder: (provided: any) => ({
+      ...provided,
+      color: `${theme.colors.slate10}`,
+      [`.yellow-theme &`]: {
+        color: `${theme.colors.whiteA11}`,
+      },
+    }),
+    singleValue: (provided: any) => ({
+      ...provided,
+      [`.yellow-theme &`]: {
+        color: `${theme.colors.hiContrast}`,
+      },
+      [`.dark-theme &`]: {
+        color: `${theme.colors.hiContrast}`,
+      },
+    }),
+    noOptionsMessage: (provided: any) => ({
+      ...provided,
+      [`.yellow-theme &`]: {
+        color: `${theme.colors.whiteA11}`,
+      },
     }),
   }
 

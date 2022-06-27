@@ -1,5 +1,5 @@
-import { createStitches } from '@stitches/react';
-import type * as Stitches from '@stitches/react';
+import { createStitches } from '@stitches/react'
+import type * as Stitches from '@stitches/react'
 import {
   blackA,
   whiteA,
@@ -51,8 +51,8 @@ import {
   tomatoDark,
   violetDark,
   yellowDark,
-} from '@radix-ui/colors';
-import { SCREENS } from './constants';
+} from '@radix-ui/colors'
+import { SCREENS } from './constants'
 
 export const { styled, config, theme, createTheme, globalCss, keyframes } =
   createStitches({
@@ -100,8 +100,9 @@ export const { styled, config, theme, createTheme, globalCss, keyframes } =
 
         stop1: '$red6',
         stop2: '$red10',
-        stop3: '$slate3',
-        stop4: '$slate6',
+
+        lg1: '$slate4',
+        lg2: '$slate3',
 
         primary1: '$red1',
         primary2: '$red2',
@@ -258,7 +259,7 @@ export const { styled, config, theme, createTheme, globalCss, keyframes } =
         width: value,
       }),
     },
-  });
+  })
 
 export const darkTheme = createTheme('dark-theme', {
   colors: {
@@ -300,8 +301,9 @@ export const darkTheme = createTheme('dark-theme', {
 
     stop1: '$crimson8',
     stop2: '$plum11',
-    stop3: '$slate1',
-    stop4: '$slate3',
+
+    lg1: '$slate4',
+    lg2: '$slate3',
 
     data1: '$violet9',
     data2: '$plum9',
@@ -320,7 +322,7 @@ export const darkTheme = createTheme('dark-theme', {
     primary11: '$crimson11',
     primary12: '$crimson12',
   },
-});
+})
 
 export const blueTheme = createTheme('blue-theme', {
   colors: {
@@ -335,8 +337,9 @@ export const blueTheme = createTheme('blue-theme', {
 
     stop1: '$sky9',
     stop2: '$indigo11',
-    stop3: '$slate3',
-    stop4: '$slate6',
+
+    lg1: '$slate4',
+    lg2: '$slate3',
 
     data1: '$blue9',
     data2: '$cyan9',
@@ -355,7 +358,7 @@ export const blueTheme = createTheme('blue-theme', {
     primary11: '$blue11',
     primary12: '$blue12',
   },
-});
+})
 export const greenTheme = createTheme('green-theme', {
   colors: {
     appBg1: '$slate1',
@@ -369,8 +372,9 @@ export const greenTheme = createTheme('green-theme', {
 
     stop1: '$mint9',
     stop2: '$grass11',
-    stop3: '$slate3',
-    stop4: '$slate6',
+
+    lg1: '$slate4',
+    lg2: '$slate3',
 
     data1: '$green9',
     data2: '$teal9',
@@ -389,7 +393,7 @@ export const greenTheme = createTheme('green-theme', {
     primary11: '$green11',
     primary12: '$green12',
   },
-});
+})
 
 export const yellowTheme = createTheme('yellow-theme', {
   colors: {
@@ -420,10 +424,12 @@ export const yellowTheme = createTheme('yellow-theme', {
     ...cyanDark,
     ...mintDark,
 
-    appBg1: '$whiteA3',
-    appBg2: '$whiteA3',
+    // appBg1: '$whiteA3',
+    // appBg2: '$whiteA3',
+    appBg1: '$blue9',
+    appBg2: '$blue9',
     appBg3: '$blue8',
-    appBg4: '$blue10',
+    appBg4: '$blue7',
 
     hiContrast: '$blue12',
     loContrast: '$blue11',
@@ -431,8 +437,9 @@ export const yellowTheme = createTheme('yellow-theme', {
 
     stop1: '$red9',
     stop2: '$yellow11',
-    stop3: '$slate3',
-    stop4: '$slate6',
+
+    lg1: '$blue10',
+    lg2: '$blue8',
 
     data1: '$mint9',
     data2: '$yellow9',
@@ -451,4 +458,4 @@ export const yellowTheme = createTheme('yellow-theme', {
     primary11: '$blue12',
     primary12: '$amber12',
   },
-});
+})

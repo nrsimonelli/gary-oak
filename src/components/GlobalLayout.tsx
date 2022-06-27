@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom';
-import { Box } from './Box';
+import { Outlet } from 'react-router-dom'
+import { Box } from './Box'
 
 export const GlobalLayout = () => {
   return (
@@ -11,12 +11,12 @@ export const GlobalLayout = () => {
         width: '100%',
         height: '$vh',
         backgroundImage:
-          'linear-gradient(19deg, $colors$appBg4 0%, $colors$appBg3 100%)',
+          'linear-gradient(19deg, $colors$lg1 0%, $colors$lg2 100%)',
         overflowY: 'auto',
         scrollBehavior: 'smooth',
       }}
     >
       <Outlet />
     </Box>
-  );
-};
+  )
+}
