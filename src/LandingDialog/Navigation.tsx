@@ -12,6 +12,8 @@ interface NavigationProps {
   handleBack: () => void
   stage: number
   isAddDisabled: boolean
+  isNameEmpty: boolean
+  isTeamEmpty: boolean
 }
 
 export const Navigation = ({
@@ -21,6 +23,8 @@ export const Navigation = ({
   handleNext,
   stage,
   isAddDisabled,
+  isNameEmpty,
+  isTeamEmpty,
 }: NavigationProps) => {
   const StyledPlus = styled(PlusIcon, {
     marginRight: 4,
@@ -30,7 +34,7 @@ export const Navigation = ({
   return (
     <Flex css={{ p: '$3' }}>
       {stage === 0 && (
-        <Button variant={'primary'} onClick={handleNext}>
+        <Button variant={'primary'} onClick={handleNext} disabled={isNameEmpty}>
           Next
         </Button>
       )}
@@ -49,7 +53,12 @@ export const Navigation = ({
             <Button css={{ mr: '$2' }} variant={'outline'} onClick={handleBack}>
               Back
             </Button>
-            <Button css={{ ml: '$2' }} variant={'primary'} onClick={handleNext}>
+            <Button
+              css={{ ml: '$2' }}
+              variant={'primary'}
+              onClick={handleNext}
+              disabled={isTeamEmpty}
+            >
               Next
             </Button>
           </Flex>
