@@ -1,4 +1,4 @@
-import { keyframes, styled } from '../stitches.config';
+import { keyframes, styled } from '../stitches.config'
 
 export const Text = styled('span', {
   // local resets here
@@ -121,25 +121,32 @@ export const Text = styled('span', {
         my: '$4',
       },
     },
+    gradient: {
+      true: {
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        linearGradient: 'to right, $stop3, $stop2',
+      },
+    },
   },
   defaultVariants: {
     variant: 'default',
   },
-});
+})
 
 const fade = keyframes({
   '0%': { opacity: 0 },
   '35%': { opacity: '100%' },
   '65%': { opacity: '100%' },
   '100%': { opacity: 0 },
-});
+})
 
 export const RivalName = styled(Text, {
   animationName: `${fade}`,
   animationDuration: '3000ms',
   animationIterationCount: 0,
   animationTimingFunction: 'ease',
-});
+})
 
 export const Tag = styled(Text, {
   borderRadius: '$5',
@@ -222,4 +229,4 @@ export const Tag = styled(Text, {
       },
     },
   },
-});
+})

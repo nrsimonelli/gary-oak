@@ -100,6 +100,7 @@ export const { styled, config, theme, createTheme, globalCss, keyframes } =
 
         stop1: '$red6',
         stop2: '$red10',
+        stop3: '$orange8',
 
         lg1: '$slate4',
         lg2: '$slate3',
@@ -258,6 +259,9 @@ export const { styled, config, theme, createTheme, globalCss, keyframes } =
         height: value,
         width: value,
       }),
+      linearGradient: (value: Stitches.PropertyValue<'backgroundImage'>) => ({
+        backgroundImage: `linear-gradient(${value})`,
+      }),
     },
   })
 
@@ -301,6 +305,7 @@ export const darkTheme = createTheme('dark-theme', {
 
     stop1: '$crimson8',
     stop2: '$plum11',
+    stop3: '$crimson11',
 
     lg1: '$slate4',
     lg2: '$slate3',
@@ -337,6 +342,7 @@ export const blueTheme = createTheme('blue-theme', {
 
     stop1: '$sky9',
     stop2: '$indigo11',
+    stop3: '$sky9',
 
     lg1: '$slate4',
     lg2: '$slate3',
@@ -372,6 +378,7 @@ export const greenTheme = createTheme('green-theme', {
 
     stop1: '$mint9',
     stop2: '$grass11',
+    stop3: '$mint10',
 
     lg1: '$slate4',
     lg2: '$slate3',
@@ -437,6 +444,7 @@ export const yellowTheme = createTheme('yellow-theme', {
 
     stop1: '$red9',
     stop2: '$yellow11',
+    stop3: '$yellow9',
 
     lg1: '$blue10',
     lg2: '$blue8',
