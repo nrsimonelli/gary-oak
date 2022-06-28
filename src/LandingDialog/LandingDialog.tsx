@@ -21,7 +21,7 @@ interface LandingDialogProps {
 export interface SelectState {
   key: number
   id: number
-  name: string | undefined
+  name: string
 }
 
 export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {

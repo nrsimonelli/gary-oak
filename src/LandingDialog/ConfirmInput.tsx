@@ -1,11 +1,11 @@
-import { Box } from '../components/Box'
 import { Flex } from '../components/Flex'
 import { Img } from '../components/Img'
 import { Text } from '../components/Text'
 import { SPRITE_OPTIONS } from '../constants'
 import { useGetPokemonByNameQuery } from '../redux/slice/pokemon-api'
+import { SelectState } from './LandingDialog'
 
-const SpriteDisplay = ({ pokemon }) => {
+const SpriteDisplay = ({ pokemon }: { pokemon: string }) => {
   const { data, isFetching, isLoading, isError } =
     useGetPokemonByNameQuery(pokemon)
   const visual = data?.sprite.default
@@ -30,11 +30,17 @@ const SpriteDisplay = ({ pokemon }) => {
   )
 }
 
+interface ConfirmInputProps {
+  spriteDisplay: number
+  selectedPokemon: SelectState[]
+  playerName: string
+}
+
 export const ConfirmInput = ({
   spriteDisplay,
   selectedPokemon,
   playerName,
-}) => {
+}: ConfirmInputProps) => {
   return (
     <Flex
       align={'center'}
