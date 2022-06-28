@@ -21,7 +21,6 @@ const rivalSlice = createSlice({
   reducers: {
     setRival(state: State, action: { payload: { tag: string } }) {
       const value = action.payload.tag
-      console.log('value', value)
       if (state.rivals.find((rival) => rival.id === value)) {
         persistCurrentRival(value)
       }

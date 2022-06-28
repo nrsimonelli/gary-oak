@@ -43,7 +43,6 @@ export const AuthProvider: FC<any> = ({ children }) => {
         // https://firebase.google.com/docs/reference/js/firebase.User
         setCurrentUser(user)
       } else {
-        console.log('no user')
         setCurrentUser(null)
       }
     })

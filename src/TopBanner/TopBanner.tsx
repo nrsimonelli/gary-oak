@@ -28,13 +28,13 @@ export const TopBanner = () => {
       console.log('no user?')
       return
     }
+    // if they have data, load it
+    // if they dont, send to welcome screen
     fetchPlayerData(currentUser.uid)
       .then((data) => {
         if (data) {
-          console.log('data found =>', data)
           dispatch(setPlayer({ data }))
         } else {
-          console.log('no data found... sending to welcome screen')
           dispatch(
             setPlayer({
               data: {
@@ -49,39 +49,27 @@ export const TopBanner = () => {
         }
       })
       .catch((err) => {
-        console.log('error fetching data', err)
+        console.log('error fetching data =>', err)
       })
   }
 
   return (
-    <>
-      {/* WILL DELETE */}
-      <Container variant={'responsive'} css={{ height: '20vh' }}>
-        <Button variant={'secondary'} onClick={handleUserCheck}>
-          Check For User Data
-        </Button>
-        <Button variant={'primary'} onClick={() => setOpenWelcomeScreen(true)}>
-          Open Welcome Screen
-        </Button>
-        <LandingDialog
-          open={openWelcomeScreen}
-          onOpenChange={() => setOpenWelcomeScreen(!openWelcomeScreen)}
-        />
-      </Container>
-      {/* TEMPORARY */}
-      <Container variant={'responsive'} css={{ height: '60vh' }}>
-        <Flex align={'center'} justify={'between'} css={{ height: '$full' }}>
-          <Flex direction={'column'} css={{ flex: '2' }}>
-            <Text variant={'title'}>Rival Dex</Text>
-            <Text variant={'h2'} css={{ pr: '$3' }}>
-              Legendary trainers & their Pokemon
-            </Text>
-          </Flex>
-          <Flex align={'center'} justify={'end'} css={{ flex: '1' }}>
-            <ThemeToggle />
-          </Flex>
+    <Container variant={'responsive'} css={{ height: '60vh' }}>
+      <LandingDialog
+        open={openWelcomeScreen}
+        onOpenChange={() => setOpenWelcomeScreen(!openWelcomeScreen)}
+      />
+      <Flex align={'center'} justify={'between'} css={{ height: '$full' }}>
+        <Flex direction={'column'} css={{ flex: '2' }}>
+          <Text variant={'title'}>Rival Dex</Text>
+          <Text variant={'h2'} css={{ pr: '$3' }}>
+            Legendary trainers & their Pokemon
+          </Text>
         </Flex>
-      </Container>
-    </>
+        <Flex align={'center'} justify={'end'} css={{ flex: '1' }}>
+          <ThemeToggle />
+        </Flex>
+      </Flex>
+    </Container>
   )
 }

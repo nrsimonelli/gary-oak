@@ -14,11 +14,9 @@ const playerSlice = createSlice({
   reducers: {
     setPlayer(state: Trainer, action: { payload: { data: Trainer } }) {
       const { data } = action.payload
-      console.log('setting player', data)
       return (state = { ...state, ...data })
     },
     clearPlayer(state: Trainer) {
-      console.log('clearing player state')
       return (state = initialState)
     },
   },

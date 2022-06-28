@@ -10,16 +10,25 @@ import {
   logInWithGoogle,
   logOut,
 } from '../utils/auth'
-import { useAppDispatch } from '../utils/hooks'
+import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import { GearIcon, GitHubLogoIcon, PersonIcon } from '@radix-ui/react-icons'
+import { getInitialRival } from '../utils/localStorage'
+import { setRival } from '../redux/slice/rival-slice'
+import { clearFeaturedPokemon } from '../redux/slice/display-slice'
 
 export const LandingButtons = () => {
   const currentUser = useContext(AuthContext)
   const dispatch = useAppDispatch()
+  const selectedRival = useAppSelector((state) => state.rival.selectedRival)
 
   const handleLogOut = () => {
-    logOut()
+    if (selectedRival === 'player') {
+      const tag = getInitialRival()
+      dispatch(clearFeaturedPokemon())
+      dispatch(setRival({ tag }))
+    }
     dispatch(clearPlayer())
+    logOut()
   }
 
   const authProviders = [

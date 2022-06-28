@@ -167,7 +167,6 @@ export const SearchBar = ({
         isClearable={true}
         isSearchable={true}
         onChange={handleSelect}
-        onMenuClose={() => console.log('hi')}
         name={'pokemon-select'}
         options={transformedOptions}
       />

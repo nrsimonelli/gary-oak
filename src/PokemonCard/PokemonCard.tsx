@@ -104,7 +104,6 @@ export const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
     startClickTimer()
   }
   const onMouseUp = () => {
-    console.log('handleOnMouseUp')
     clearTimeout(timerRef.current)
   }
 

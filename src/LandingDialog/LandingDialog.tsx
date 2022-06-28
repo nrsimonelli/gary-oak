@@ -129,7 +129,6 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
   }
 
   const handleSave = () => {
-    console.log('saving')
     const result = assembleData()
     const uid = currentUser?.uid
     if (result.success && uid) {
@@ -142,8 +141,10 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
       dispatch(setPlayer({ data }))
       updatePlayerData(uid, data)
       onOpenChange()
+      // Toast
     } else {
       console.log('err0r', result)
+      // Toast
       // send data to firestore...
     }
   }

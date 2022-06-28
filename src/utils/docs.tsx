@@ -83,10 +83,8 @@ export const fetchPlayerData = async (uid: string) => {
   const docSnap = await getDoc(docRef)
 
   if (docSnap.exists()) {
-    console.log('user found!', docSnap.data())
     return Trainer.parse(docSnap.data())
   } else {
-    console.log('user not found')
     return null
   }
 }
