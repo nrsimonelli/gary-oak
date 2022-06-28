@@ -21,7 +21,7 @@ const SpriteDisplay = ({ pokemon }) => {
         <Img
           src={visual}
           css={{
-            width: '120px',
+            width: '100px',
             height: 'auto',
           }}
         />
@@ -36,26 +36,46 @@ export const ConfirmInput = ({
   playerName,
 }) => {
   return (
-    <Flex align={'center'} direction={'column'}>
-      <Text variant={'h3'} css={{ mb: '$3' }}>
-        Step 3: Confirm team {playerName}
+    <Flex
+      align={'center'}
+      justify={'start'}
+      direction={'column'}
+      css={{ flex: '1 0 0' }}
+    >
+      <Text variant={'h3'} css={{ py: '$3' }}>
+        Step 3: Confirm team
       </Text>
-      <Flex direction={'row'} align={'center'} css={{ width: '$full' }}>
-        <Img
-          src={SPRITE_OPTIONS[spriteDisplay]?.path || 'src/assets/error.png'}
-          css={{
-            height: '120px',
-            width: 'auto',
-          }}
-        />
+      <Flex
+        direction={'column'}
+        justify={'center'}
+        css={{
+          height: '$full',
+        }}
+      >
         <Flex
           direction={'row'}
-          wrap={'wrapReverse'}
-          align={'end'}
+          align={'center'}
+          justify={'center'}
+          css={{ py: '$3' }}
+        >
+          <Img
+            src={SPRITE_OPTIONS[spriteDisplay]?.path || 'src/assets/error.png'}
+            css={{
+              height: '120px',
+              width: 'auto',
+            }}
+          />
+          <Text variant={'h3'} gradient css={{ minWidth: '120px' }}>
+            {playerName}
+          </Text>
+        </Flex>
+        <Flex
+          direction={'row'}
+          wrap={'wrap'}
+          align={'center'}
           justify={'center'}
           css={{
             width: '360px',
-            height: '240px',
           }}
         >
           {selectedPokemon.length > 0 &&

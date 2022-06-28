@@ -18,8 +18,10 @@ const DialogContent = styled(DialogPrimitive.Content, {
   boxShadow:
     'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   width: '90vw',
-  minWidth: 400,
-  maxWidth: '720px',
+  minWidth: 480,
+  maxWidth: 720,
+  maxHeight: 625,
+  height: '$full',
   padding: '$5',
   borderRadius: '$3',
 })

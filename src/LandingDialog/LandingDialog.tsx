@@ -1,12 +1,7 @@
-import { Button } from '../components/Button'
 import { Flex } from '../components/Flex'
-import { Input } from '../components/Input'
 import { DialogBody, DialogRoot } from '../components/Dialog'
-import { useAppDispatch, useInput } from '../utils/hooks'
+import { useAppDispatch } from '../utils/hooks'
 import { useContext, useState } from 'react'
-import { SearchBar } from '../SearchBar/SearchBar'
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
-import { Img } from '../components/Img'
 import { SPRITE_OPTIONS } from '../constants'
 import { z } from 'zod'
 import { setPlayer } from '../redux/slice/player-slice'
@@ -40,23 +35,23 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
   ])
   const [animateKey, setAnimateKey] = useState(-1)
   const [spriteDisplay, setSpriteDisplay] = useState(0)
-  const userName = useInput('')
+  const [userName, setUserName] = useState<string>('')
 
   const largestKey = () => {
     let value = 0
     for (const mon of selectedPokemon) {
       if (mon.key >= value) {
         value = mon.key + 1
-        console.log(value)
-      } else {
-        console.log('miss')
       }
     }
     return value
   }
 
+  const onNameChange = (event: { target: { value: string } }) => {
+    setUserName(event.target.value.trim())
+  }
+
   const handleOnOpenChange = () => {
-    console.log('firing on Open Change')
     onOpenChange()
   }
 
@@ -126,7 +121,7 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
       return { id: mon.id, name: mon.name, isStarter: index < 3 ? true : false }
     })
     const profileData = {
-      name: userName.value,
+      name: userName,
       path: SPRITE_OPTIONS[spriteDisplay].path,
       pokemon: teamData,
     }
@@ -154,7 +149,12 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
   }
 
   const handleNext = () => {
-    setStage(stage + 1)
+    if (stage === 1) {
+      setSelectedPokemon(selectedPokemon.filter((x) => x.id !== 0))
+      setStage(stage + 1)
+    } else {
+      setStage(stage + 1)
+    }
   }
 
   const handleBack = () => {
@@ -162,6 +162,8 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
   }
 
   const isAddDisabled = selectedPokemon.length > 5
+  const isNameEmpty = userName === ''
+  const isTeamEmpty = selectedPokemon.filter((x) => x.id !== 0).length < 1
 
   return (
     <DialogRoot open={open} onOpenChange={handleOnOpenChange}>
@@ -186,8 +188,8 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
             <CharacterInput
               handleChevronClick={handleChevronClick}
               spriteDisplay={spriteDisplay}
-              userValue={userName.value}
-              userChange={userName.onChange}
+              userValue={userName}
+              userChange={onNameChange}
             />
           )}
           {stage === 1 && (
@@ -203,7 +205,7 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
             <ConfirmInput
               spriteDisplay={spriteDisplay}
               selectedPokemon={selectedPokemon}
-              playerName={userName.value}
+              playerName={userName}
             />
           )}
           <Navigation
@@ -213,6 +215,8 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
             handleBack={handleBack}
             stage={stage}
             isAddDisabled={isAddDisabled}
+            isNameEmpty={isNameEmpty}
+            isTeamEmpty={isTeamEmpty}
           />
         </Flex>
       </DialogBody>

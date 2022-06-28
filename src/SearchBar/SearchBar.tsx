@@ -53,15 +53,10 @@ export const SearchBar = ({
   resetAnimateKey,
 }: SearchBarProps) => {
   const [isDeleting, setIsDeleting] = useState(false)
-  // someone is typing
-  const handleInputChange = (newValue: string) => {
-    console.log(`inputChange => ${targetValue}`, newValue)
-  }
   // option selected
   const handleSelect = (
     newValue: { value: number; label: string | undefined } | null
   ) => {
-    console.log(`inputSELECT => ${targetValue}`, newValue?.label)
     if (newValue) {
       updatePokemon(targetValue, newValue)
     }
@@ -78,7 +73,6 @@ export const SearchBar = ({
   })
 
   const handleAnimationEnd = () => {
-    console.log(`Animation End block ${targetValue}`)
     if (isDeleting) {
       setIsDeleting(false)
       handleRemove(targetValue)
@@ -87,7 +81,6 @@ export const SearchBar = ({
   }
 
   const onDeleteClick = () => {
-    console.log('deleteClicked', targetValue)
     setIsDeleting(true)
   }
 
@@ -173,8 +166,8 @@ export const SearchBar = ({
         defaultValue={initialValue.label ? initialValue : undefined}
         isClearable={true}
         isSearchable={true}
-        onInputChange={handleInputChange}
         onChange={handleSelect}
+        onMenuClose={() => console.log('hi')}
         name={'pokemon-select'}
         options={transformedOptions}
       />
