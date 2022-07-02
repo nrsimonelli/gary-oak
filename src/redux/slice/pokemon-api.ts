@@ -1,5 +1,33 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { z } from 'zod'
 import { Pokemon } from '../../types'
+
+const PokemonResponse = z.object({
+  id: z.number(),
+  name: z.string(),
+  sprite: z.object({
+    default: z.string(),
+    shiny: z.string(),
+    official: z.string(),
+  }),
+  hp: z.number(),
+  attack: z.number(),
+  defense: z.number(),
+  'special-attack': z.number(),
+  'special-defense': z.number(),
+  speed: z.number(),
+  types: z.array(
+    z.object({
+      slot: z.number(),
+      type: z.object({
+        name: z.string(),
+        url: z.string(),
+      }),
+    })
+  ),
+})
+
+export type PokemonResponse = z.infer<typeof PokemonResponse>
 
 const deserializePokemon = (data: Pokemon) => ({
   id: data.id,

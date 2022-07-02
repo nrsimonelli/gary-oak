@@ -40,7 +40,7 @@ export const PokemonCard = ({
   const title = data?.name
   const visual = easterEgg ? data?.sprite.shiny : data?.sprite.official
 
-  const isDisplayed = featureList.includes(data)
+  const isDisplayed = data && featureList.includes(data)
   const shouldRemove = isFeatured && !isDisplayed
 
   const isPlayer = rival === 'player'
@@ -50,7 +50,7 @@ export const PokemonCard = ({
     if (isLoading) {
       return
     }
-    if (isFeatured && !isDisplayed) {
+    if (isFeatured && !isDisplayed && data) {
       dispatch(setFeaturedPokemon({ data }))
     }
     setInitialized(true)
@@ -67,6 +67,9 @@ export const PokemonCard = ({
   }, [featureList])
 
   const handleClick = () => {
+    if (!data) {
+      return
+    }
     if (isFeatured) {
       dispatch(removeFeaturedPokemon({ data }))
     } else {

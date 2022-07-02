@@ -1,16 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { z } from 'zod'
-import { PokemonURL } from '../../types'
+import { PokemonResponse } from './pokemon-api'
 import { Trainer, updatePlayerData } from '../../utils/docs'
 
-// const PokemonOnly = Trainer.pick({ pokemon: true })
-// type PokemonOnly = z.infer<typeof PokemonOnly>
-
-// interface State {
-//   featuredPokemon: []
-// }
 // add interface later
-const initialState: any = {
+interface InitialState {
+  featuredPokemon: PokemonResponse[]
+}
+const initialState: InitialState = {
   featuredPokemon: [],
 }
 
@@ -18,7 +15,10 @@ const displaySlice = createSlice({
   name: 'display',
   initialState,
   reducers: {
-    setFeaturedPokemon(state, action: { payload: { data: any } }) {
+    setFeaturedPokemon(
+      state: InitialState,
+      action: { payload: { data: PokemonResponse } }
+    ) {
       const { data } = action.payload
       const array = state.featuredPokemon
       if (array.length === 3) {
@@ -29,7 +29,10 @@ const displaySlice = createSlice({
         array.push(data)
       }
     },
-    removeFeaturedPokemon(state, action) {
+    removeFeaturedPokemon(
+      state: InitialState,
+      action: { payload: { data: PokemonResponse } }
+    ) {
       const { data } = action.payload
       const array = state.featuredPokemon
       const targetIndex = array.findIndex(
@@ -39,7 +42,7 @@ const displaySlice = createSlice({
         array.splice(targetIndex, 1)
       }
     },
-    clearFeaturedPokemon(state) {
+    clearFeaturedPokemon(state: InitialState) {
       state.featuredPokemon = []
     },
   },
