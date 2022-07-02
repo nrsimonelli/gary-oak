@@ -16,11 +16,25 @@ const playerSlice = createSlice({
       const { data } = action.payload
       return (state = { ...state, ...data })
     },
+    addPokemon(
+      state: Trainer,
+      action: {
+        payload: {
+          pokemonToAdd: { id: number; name: string; isStarter: boolean }
+        }
+      }
+    ) {
+      const { pokemonToAdd } = action.payload
+      console.log('pokemon', pokemonToAdd)
+      state.pokemon.push(pokemonToAdd)
+      // console.log('state', state)
+      return state
+    },
     clearPlayer(state: Trainer) {
       return (state = initialState)
     },
   },
 })
 
-export const { setPlayer, clearPlayer } = playerSlice.actions
+export const { setPlayer, clearPlayer, addPokemon } = playerSlice.actions
 export default playerSlice.reducer

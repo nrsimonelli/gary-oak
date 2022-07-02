@@ -18,6 +18,16 @@ const deserializePokemon = (data: Pokemon) => ({
   types: data.types,
 })
 
+const deserializeSprites = (data: Pokemon) => ({
+  id: data.id,
+  name: data.name,
+  sprite: {
+    default: data.sprites?.front_default,
+    shiny: data.sprites?.front_shiny,
+    official: data.sprites.other['official-artwork']?.front_default,
+  },
+})
+
 export const pokemonApiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
@@ -32,9 +42,16 @@ export const pokemonApiSlice = createApi({
       query: (value: string | number) => `pokemon/${value}`,
       transformResponse: (response: Pokemon) => deserializePokemon(response),
     }),
+    getSpriteOnly: builder.query({
+      query: (value: string) => `pokemon/${value}`,
+      transformResponse: (response: Pokemon) => deserializeSprites(response),
+    }),
   }),
 })
 
 // Export hooks for usage in functional components
-export const { useGetPokemonByNameQuery, useGetAllPokemonQuery } =
-  pokemonApiSlice
+export const {
+  useGetPokemonByNameQuery,
+  useGetAllPokemonQuery,
+  useGetSpriteOnlyQuery,
+} = pokemonApiSlice

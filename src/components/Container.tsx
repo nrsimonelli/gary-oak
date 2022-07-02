@@ -1,4 +1,4 @@
-import { styled } from '../stitches.config';
+import { styled } from '../stitches.config'
 
 export const Container = styled('div', {
   // local resets here
@@ -54,4 +54,4 @@ export const Container = styled('div', {
     variant: 'full',
     px: 3,
   },
-});
+})

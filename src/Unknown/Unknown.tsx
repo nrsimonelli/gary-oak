@@ -18,11 +18,11 @@ const Unknown = () => {
           backgroundPosition: 'center',
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
+          outline: '1px solid red',
           position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
+          width: '100%',
+          height: '100%',
+          maxHeight: '720px',
           opacity: '.3',
         },
       }}
@@ -39,7 +39,7 @@ const Unknown = () => {
         404
       </Text>
       <Text variant={'h3'} css={{ zIndex: '$1', mb: '$3' }}>
-        Oh no! That page is unknown to us
+        Looks like you've landed on page Unknown
       </Text>
       <Text variant={'h3'} css={{ zIndex: '$1', mb: '$6' }}>
         Please try again

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Select from 'react-select'
 import { Button } from '../components/Button'
 import { POKEMON_LIST } from '../constants'
@@ -44,6 +44,75 @@ const exitAnimation = keyframes({
   '100%': { transform: 'scale(0)' },
 })
 
+export const customSelectStyles = {
+  option: (provided: any, state: { isSelected: any; isFocused: any }) => ({
+    ...provided,
+    color: state.isSelected
+      ? `${theme.colors.inverse}`
+      : `${theme.colors.primary10}`,
+    backgroundColor: state.isSelected
+      ? `${theme.colors.primary9}`
+      : state.isFocused
+      ? `${theme.colors.primary4}`
+      : `${theme.colors.appBg2}`,
+    [`.yellow-theme &`]: {
+      backgroundColor: state.isSelected
+        ? `${theme.colors.primary9}`
+        : state.isFocused
+        ? `${theme.colors.blue8}`
+        : `${theme.colors.appBg2}`,
+    },
+    padding: `${theme.space[2]}`,
+  }),
+  container: (provided: any) => ({
+    ...provided,
+    width: 200,
+  }),
+  control: (provided: any, state: { isFocused: any }) => ({
+    ...provided,
+    backgroundColor: `${theme.colors.appBg1}`,
+    ':hover': {
+      borderColor: `${theme.colors.primary10}`,
+    },
+    boxShadow: state.isFocused
+      ? `0 0 0 1px ${theme.colors.primary10}`
+      : undefined,
+    borderColor: state.isFocused
+      ? `${theme.colors.primary10}`
+      : `${theme.colors.slate7}`,
+  }),
+  menu: (provided: any) => ({
+    ...provided,
+    backgroundColor: `${theme.colors.appBg2}`,
+  }),
+  input: (provided: any) => ({
+    ...provided,
+    color: `${theme.colors.hiContrast}`,
+  }),
+  placeholder: (provided: any) => ({
+    ...provided,
+    color: `${theme.colors.slate10}`,
+    [`.yellow-theme &`]: {
+      color: `${theme.colors.whiteA11}`,
+    },
+  }),
+  singleValue: (provided: any) => ({
+    ...provided,
+    [`.yellow-theme &`]: {
+      color: `${theme.colors.hiContrast}`,
+    },
+    [`.dark-theme &`]: {
+      color: `${theme.colors.hiContrast}`,
+    },
+  }),
+  noOptionsMessage: (provided: any) => ({
+    ...provided,
+    [`.yellow-theme &`]: {
+      color: `${theme.colors.whiteA11}`,
+    },
+  }),
+}
+
 export const SearchBar = ({
   targetValue,
   initialValue,
@@ -84,75 +153,6 @@ export const SearchBar = ({
     setIsDeleting(true)
   }
 
-  const customStyles = {
-    option: (provided: any, state: { isSelected: any; isFocused: any }) => ({
-      ...provided,
-      color: state.isSelected
-        ? `${theme.colors.inverse}`
-        : `${theme.colors.primary10}`,
-      backgroundColor: state.isSelected
-        ? `${theme.colors.primary9}`
-        : state.isFocused
-        ? `${theme.colors.primary4}`
-        : `${theme.colors.appBg2}`,
-      [`.yellow-theme &`]: {
-        backgroundColor: state.isSelected
-          ? `${theme.colors.primary9}`
-          : state.isFocused
-          ? `${theme.colors.blue8}`
-          : `${theme.colors.appBg2}`,
-      },
-      padding: `${theme.space[2]}`,
-    }),
-    container: (provided: any) => ({
-      ...provided,
-      width: 200,
-    }),
-    control: (provided: any, state: { isFocused: any }) => ({
-      ...provided,
-      backgroundColor: `${theme.colors.appBg1}`,
-      ':hover': {
-        borderColor: `${theme.colors.primary10}`,
-      },
-      boxShadow: state.isFocused
-        ? `0 0 0 1px ${theme.colors.primary10}`
-        : undefined,
-      borderColor: state.isFocused
-        ? `${theme.colors.primary10}`
-        : `${theme.colors.slate7}`,
-    }),
-    menu: (provided: any) => ({
-      ...provided,
-      backgroundColor: `${theme.colors.appBg2}`,
-    }),
-    input: (provided: any) => ({
-      ...provided,
-      color: `${theme.colors.hiContrast}`,
-    }),
-    placeholder: (provided: any) => ({
-      ...provided,
-      color: `${theme.colors.slate10}`,
-      [`.yellow-theme &`]: {
-        color: `${theme.colors.whiteA11}`,
-      },
-    }),
-    singleValue: (provided: any) => ({
-      ...provided,
-      [`.yellow-theme &`]: {
-        color: `${theme.colors.hiContrast}`,
-      },
-      [`.dark-theme &`]: {
-        color: `${theme.colors.hiContrast}`,
-      },
-    }),
-    noOptionsMessage: (provided: any) => ({
-      ...provided,
-      [`.yellow-theme &`]: {
-        color: `${theme.colors.whiteA11}`,
-      },
-    }),
-  }
-
   return (
     <AnimatedRow
       css={{ '&[option]': { color: 'green' } }}
@@ -162,7 +162,7 @@ export const SearchBar = ({
       direction={'row'}
     >
       <Select
-        styles={customStyles}
+        styles={customSelectStyles}
         defaultValue={initialValue.label ? initialValue : undefined}
         isClearable={true}
         isSearchable={true}

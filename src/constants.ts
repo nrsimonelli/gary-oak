@@ -18,12 +18,18 @@ export const POKEBALL = [
     theme: THEMES.DEFAULT,
     path: 'src/assets/themeIcons/red.png',
   },
-  { theme: THEMES.BLUE, path: 'src/assets/themeIcons/blue.png' },
+  {
+    theme: THEMES.BLUE,
+    path: 'src/assets/themeIcons/blue.png',
+  },
   {
     theme: THEMES.GREEN,
     path: 'src/assets/themeIcons/green.png',
   },
-  { theme: THEMES.DARK, path: 'src/assets/themeIcons/white.png' },
+  {
+    theme: THEMES.DARK,
+    path: 'src/assets/themeIcons/white.png',
+  },
   {
     theme: THEMES.YELLOW,
     path: 'src/assets/themeIcons/gold.png',

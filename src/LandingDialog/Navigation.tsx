@@ -28,8 +28,6 @@ export const Navigation = ({
 }: NavigationProps) => {
   const StyledPlus = styled(PlusIcon, {
     marginRight: 4,
-    // height: 20,
-    // width: 20,
   })
   return (
     <Flex css={{ p: '$3' }}>

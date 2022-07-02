@@ -175,6 +175,11 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
         onInteractOutside={(event: { preventDefault: () => void }) => {
           event.preventDefault()
         }}
+        onEscapeKeyDown={(event: { preventDefault: () => void }) => {
+          console.log('escape logged')
+
+          event.preventDefault()
+        }}
       >
         <Flex
           direction={'column'}

@@ -10,19 +10,31 @@ import {
   setFeaturedPokemon,
 } from '../redux/slice/display-slice'
 import { Img } from '../components/Img'
+import { LoopIcon } from '@radix-ui/react-icons'
+import { Button } from '../components/Button'
 
 interface PokeCardProps {
   pokemon: string
   isStarter: boolean
+  handleSwapClick: (data: {
+    value: number
+    label: string
+    image: string
+  }) => void
 }
 
-export const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
+export const PokemonCard = ({
+  pokemon,
+  isStarter,
+  handleSwapClick,
+}: PokeCardProps) => {
   const dispatch = useAppDispatch()
   const { data, isFetching, isLoading, isError } =
     useGetPokemonByNameQuery(pokemon)
   const [isFeatured, setIsFeatured] = useState(() => isStarter)
   const [initialized, setInitialized] = useState(false)
   const featureList = useAppSelector((state) => state.display.featuredPokemon)
+  const rival = useAppSelector((state) => state.rival.selectedRival)
   const [easterEgg, setEasterEgg] = useState(false)
 
   const title = data?.name
@@ -30,6 +42,8 @@ export const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
 
   const isDisplayed = featureList.includes(data)
   const shouldRemove = isFeatured && !isDisplayed
+
+  const isPlayer = rival === 'player'
 
   // fills out featureList when user switches views
   useEffect(() => {
@@ -63,10 +77,7 @@ export const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
 
   const ErrorCard = () => {
     return (
-      <PokemonContainer
-        p={'2'}
-        css={{ height: '238px', transition: 'all 300ms ease-out' }}
-      >
+      <PokemonContainer p={'2'} css={{}}>
         <Text case={'capitalize'}>Mystery</Text>
         <Flex justify={'between'}>
           <Text size={1}>???</Text>
@@ -109,9 +120,22 @@ export const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
 
   useEffect(() => {
     if (easterEgg) {
-      console.log('you did it!')
+      console.log('you found me!')
     }
   }, [easterEgg])
+
+  const onClick = (event: { stopPropagation: () => void }) => {
+    event.stopPropagation()
+    if (!data) {
+      return
+    }
+    const swapMon = {
+      value: data.id,
+      label: data.name,
+      image: data.sprite.default,
+    }
+    handleSwapClick(swapMon)
+  }
 
   return (
     <>
@@ -153,6 +177,20 @@ export const PokemonCard = ({ pokemon, isStarter }: PokeCardProps) => {
           <Box css={{ borderRadius: '$3' }}>
             <Img src={visual} css={{ width: '163px' }} />
           </Box>
+          {isPlayer && (
+            <Button
+              css={{
+                p: '$1',
+                position: 'relative',
+                bottom: 16,
+                left: 144,
+                transform: 'rotate(-45deg)',
+              }}
+              onClick={onClick}
+            >
+              <LoopIcon />
+            </Button>
+          )}
         </PokemonContainer>
       )}
     </>

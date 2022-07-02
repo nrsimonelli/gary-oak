@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
-import { Button } from '../components/Button'
 import { Container } from '../components/Container'
 import { Flex } from '../components/Flex'
 import { Text } from '../components/Text'
 import { ThemeToggle } from '../components/ThemeToggle'
 import { setPlayer } from '../redux/slice/player-slice'
 import { AuthContext } from '../utils/auth'
-import { fetchPlayerData, getAllData } from '../utils/docs'
-import { useAppDispatch, useAppSelector, useInput } from '../utils/hooks'
+import { fetchPlayerData } from '../utils/docs'
+import { useAppDispatch } from '../utils/hooks'
 import { LandingDialog } from '../LandingDialog/LandingDialog'
 
 export const TopBanner = () => {

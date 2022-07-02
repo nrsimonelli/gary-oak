@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { z } from 'zod'
 import { PokemonURL } from '../../types'
-import { Trainer } from '../../utils/docs'
+import { Trainer, updatePlayerData } from '../../utils/docs'
 
 // const PokemonOnly = Trainer.pick({ pokemon: true })
 // type PokemonOnly = z.infer<typeof PokemonOnly>

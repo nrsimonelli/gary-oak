@@ -1,4 +1,4 @@
-import { styled } from '../stitches.config';
+import { styled } from '../stitches.config'
 
 export const Box = styled('div', {
   // local resets here
@@ -23,19 +23,17 @@ export const Box = styled('div', {
   defaultVariants: {
     p: 0,
   },
-});
+})
 
 export const PokemonContainer = styled(Box, {
   borderRadius: '$3',
   mb: '$3',
   mx: 'auto',
   boxShadow: '$2',
+  height: '238px',
   '@bp2': {
     // spacing for 3 per row
     mx: 'calc((736px - (179px * 3)) / 6)',
-  },
-  '@bp3': {
-    mx: 'auto',
   },
   variants: {
     isFeatured: {
@@ -49,4 +47,4 @@ export const PokemonContainer = styled(Box, {
     },
   },
   length: 0,
-});
+})

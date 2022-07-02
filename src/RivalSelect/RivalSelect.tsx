@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { batch } from 'react-redux'
-import { Box } from '../components/Box'
-import { FilterButton } from '../components/Button'
+import { Box, PokemonContainer } from '../components/Box'
+import { Button, FilterButton } from '../components/Button'
 import { Container } from '../components/Container'
 import { Flex } from '../components/Flex'
 import { Img } from '../components/Img'
@@ -12,6 +12,10 @@ import { setRival } from '../redux/slice/rival-slice'
 import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import { PokemonCard } from '../PokemonCard/PokemonCard'
 import { RadarGraph } from '../RadarGraph/RadarGraph'
+import { PlusCircledIcon } from '@radix-ui/react-icons'
+import { styled } from '../stitches.config'
+import { SwapPokemonDialog } from './SwapPokemonDialog'
+import { AddPokemonDialog } from './AddPokemonDialog'
 
 export const RivalSelect = () => {
   const dispatch = useAppDispatch()
@@ -20,12 +24,20 @@ export const RivalSelect = () => {
   const selectedRival = useAppSelector((state) => state.rival.selectedRival)
 
   const [isLoading, setIsLoading] = useState(true)
+  const [openDialog, setOpenDialog] = useState(false)
+  const [swapDialog, setSwapDialog] = useState(false)
+  const initialPokemonSetting = { value: 0, label: '', image: '' }
+  const [activePokemon, setActivePokemon] = useState<{
+    value: number
+    label: string
+    image: string
+  }>(initialPokemonSetting)
 
   const data = useMemo(() => {
     const result = rivalData.find((rival) => rival.id === selectedRival)
     const player = playerData
     return result || player
-  }, [selectedRival])
+  }, [selectedRival, playerData])
 
   const handleRivalClick = (tag: string) => {
     setIsLoading(true)
@@ -41,8 +53,49 @@ export const RivalSelect = () => {
     }
   }, [selectedRival])
 
+  const showAddMon = selectedRival === 'player' && playerData.pokemon.length < 6
+
+  const PlusCircle = styled(PlusCircledIcon, {
+    height: 60,
+    width: 60,
+    '& path': {
+      fill: '$primary9',
+      fillRule: 'nonzero',
+      clipRule: 'nonzero',
+    },
+    // WebkitTransition: 'all 300ms',
+    '&:hover': {
+      '& path': {
+        fill: '$primary10',
+      },
+      // WebkitTransition: 'all 300ms',
+      transition: 'all 300ms ease-out',
+      // transform: 'scale(1.1)',
+    },
+  })
+
+  const handleClose = () => {
+    setActivePokemon(initialPokemonSetting)
+    setSwapDialog(!swapDialog)
+  }
+  const handleSwapClick = (
+    data: React.SetStateAction<{ value: number; label: string; image: string }>
+  ) => {
+    setActivePokemon(data)
+    setSwapDialog(true)
+  }
+
   return (
     <Flex direction={'column'} align={'center'} justify={'start'}>
+      <AddPokemonDialog
+        open={openDialog}
+        handleOnOpenChange={() => setOpenDialog(!openDialog)}
+      />
+      <SwapPokemonDialog
+        open={swapDialog}
+        activePokemon={activePokemon}
+        handleClose={handleClose}
+      />
       <Flex direction={'row'} align={'center'} css={{ pb: '$3' }}>
         {isLoading ? (
           <Skeleton variant={'spriteContainer'} css={{ my: '$5' }} />
@@ -59,13 +112,13 @@ export const RivalSelect = () => {
         <RadarGraph />
       </Flex>
       <Container
-        variant={'responsive'}
+        variant={'2'}
         css={{
           py: '$3',
           bg: '$appBg2',
           borderRadius: '$3',
           '@bp4': {
-            mb: '$3',
+            // mb: '$3',
           },
         }}
       >
@@ -109,8 +162,25 @@ export const RivalSelect = () => {
               key={mon.id + index}
               pokemon={mon.name}
               isStarter={Boolean(mon.isStarter)}
+              handleSwapClick={handleSwapClick}
             />
           ))}
+          {showAddMon && (
+            <PokemonContainer
+              p={'2'}
+              css={{
+                height: '238px',
+                width: '179px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Button onClick={() => setOpenDialog(true)}>
+                <PlusCircle />
+              </Button>
+            </PokemonContainer>
+          )}
         </Flex>
       </Container>
     </Flex>
