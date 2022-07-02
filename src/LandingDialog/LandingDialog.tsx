@@ -141,11 +141,11 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
       dispatch(setPlayer({ data }))
       updatePlayerData(uid, data)
       onOpenChange()
-      // Toast
+      // Toast ?
     } else {
+      // TODO... handle this
       console.log('err0r', result)
-      // Toast
-      // send data to firestore...
+      // Toast ?
     }
   }
 
@@ -176,8 +176,6 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
           event.preventDefault()
         }}
         onEscapeKeyDown={(event: { preventDefault: () => void }) => {
-          console.log('escape logged')
-
           event.preventDefault()
         }}
       >

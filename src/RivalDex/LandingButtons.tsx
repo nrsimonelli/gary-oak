@@ -22,7 +22,7 @@ export const LandingButtons = () => {
   const selectedRival = useAppSelector((state) => state.rival.selectedRival)
   const playerName = useAppSelector((state) => state.player.name)
 
-  const nameLabel = playerName ?? currentUser?.displayName ?? 'Welcome'
+  const nameLabel = playerName !== undefined ? playerName : 'Welcome'
 
   const handleLogOut = () => {
     if (selectedRival === 'player') {

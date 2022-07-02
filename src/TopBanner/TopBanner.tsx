@@ -15,16 +15,13 @@ export const TopBanner = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    console.log('user changed')
     if (currentUser) {
-      console.log('running user check...')
       handleUserCheck()
     }
   }, [currentUser])
 
   const handleUserCheck = () => {
     if (!currentUser) {
-      console.log('no user?')
       return
     }
     // if they have data, load it

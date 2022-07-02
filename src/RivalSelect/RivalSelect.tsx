@@ -9,7 +9,7 @@ import { Skeleton } from '../components/Skeleton'
 import { Text } from '../components/Text'
 import { clearFeaturedPokemon } from '../redux/slice/display-slice'
 import { setRival } from '../redux/slice/rival-slice'
-import { useAppDispatch, useAppSelector } from '../utils/hooks'
+import { useAppDispatch, useAppSelector, useThrottle } from '../utils/hooks'
 import { PokemonCard } from '../PokemonCard/PokemonCard'
 import { RadarGraph } from '../RadarGraph/RadarGraph'
 import { PlusCircledIcon } from '@radix-ui/react-icons'
@@ -63,14 +63,11 @@ export const RivalSelect = () => {
       fillRule: 'nonzero',
       clipRule: 'nonzero',
     },
-    // WebkitTransition: 'all 300ms',
     '&:hover': {
       '& path': {
         fill: '$primary10',
       },
-      // WebkitTransition: 'all 300ms',
       transition: 'all 300ms ease-out',
-      // transform: 'scale(1.1)',
     },
   })
 

@@ -22,7 +22,7 @@ const StyledContent = styled(Content, {
 })
 
 interface LogOutProps {
-  label: string | null
+  label: string
   handleClick: () => void
 }
 

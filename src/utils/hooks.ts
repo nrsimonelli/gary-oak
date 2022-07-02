@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux'
 
@@ -18,22 +18,34 @@ export const useInput = (initialValue: string | number) => {
   }
 }
 
-export const useThrottle = (value: string | number, limit: number) => {
-  const [throttledValue, setThrottledValue] = useState(value)
-  const lastRan = useRef(Date.now())
+export const useThrottle = (fn: Function, limit: number) => {
+  const [isReady, setIsReady] = useState(true)
+  const lastRan = useRef<number | undefined>(undefined)
+
+  const throttledFunction = useCallback(
+    (...args) => {
+      if (!isReady) {
+        return
+      }
+      setIsReady(false)
+      fn(...args)
+    },
+    [isReady, fn]
+  )
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      if (Date.now() - lastRan.current >= limit) {
-        setThrottledValue(value)
-        lastRan.current = Date.now()
+    if (typeof window !== 'undefined') {
+      if (!isReady) {
+        lastRan.current = window.setTimeout(() => {
+          setIsReady(true)
+        }, limit)
+
+        return () => window.clearTimeout(lastRan.current)
       }
-    }, limit - (Date.now() - lastRan.current))
-
-    return () => {
-      clearTimeout(handler)
+    } else {
+      console.warn('useThrottle: window is undefined.')
     }
-  }, [value, limit])
+  }, [isReady, limit])
 
-  return throttledValue
+  return [throttledFunction, isReady]
 }

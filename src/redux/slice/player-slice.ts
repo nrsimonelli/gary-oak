@@ -25,9 +25,7 @@ const playerSlice = createSlice({
       }
     ) {
       const { pokemonToAdd } = action.payload
-      console.log('pokemon', pokemonToAdd)
       state.pokemon.push(pokemonToAdd)
-      // console.log('state', state)
       return state
     },
     clearPlayer(state: Trainer) {
