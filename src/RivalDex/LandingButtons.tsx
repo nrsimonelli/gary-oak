@@ -20,6 +20,9 @@ export const LandingButtons = () => {
   const currentUser = useContext(AuthContext)
   const dispatch = useAppDispatch()
   const selectedRival = useAppSelector((state) => state.rival.selectedRival)
+  const playerName = useAppSelector((state) => state.player.name)
+
+  const nameLabel = playerName ?? currentUser?.displayName ?? 'Welcome'
 
   const handleLogOut = () => {
     if (selectedRival === 'player') {
@@ -67,10 +70,7 @@ export const LandingButtons = () => {
         </Button>
       </a>
       {currentUser ? (
-        <LogOutButton
-          label={currentUser.displayName}
-          handleClick={handleLogOut}
-        />
+        <LogOutButton label={nameLabel} handleClick={handleLogOut} />
       ) : (
         <LogInButton authProviders={authProviders} />
       )}

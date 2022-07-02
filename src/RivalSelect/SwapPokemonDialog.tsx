@@ -91,6 +91,11 @@ export const SwapPokemonDialog = ({
     handleClose()
   }
 
+  const displayMessage =
+    swapDisplay?.name && !isUninitialized
+      ? `for ${swapDisplay?.name}?`
+      : 'for... ?'
+
   return (
     <DialogRoot open={open} onOpenChange={handleClose}>
       <DialogBody
@@ -124,15 +129,19 @@ export const SwapPokemonDialog = ({
           >
             {/* {JSON.stringify(activePokemon)} */}
             <Text variant={'h3'} css={{ py: '$3' }}>
-              Swap {activePokemon.label}?
+              Manage your starters
             </Text>
+            {JSON.stringify(isUninitialized)}
             <Flex
               direction={'column'}
               justify={'center'}
               align={'center'}
               css={{ height: '$full' }}
             >
-              <Flex direction={'row'}>
+              <Text>
+                Trade {activePokemon.label} {displayMessage}
+              </Text>
+              <Flex direction={'row'} css={{ mt: '$3' }}>
                 <Img
                   src={activePokemon.image}
                   css={{
@@ -172,7 +181,12 @@ export const SwapPokemonDialog = ({
             >
               Cancel
             </Button>
-            <Button css={{ ml: '$2' }} variant={'primary'} onClick={handleSave}>
+            <Button
+              css={{ ml: '$2' }}
+              variant={'primary'}
+              onClick={handleSave}
+              disabled={isUninitialized}
+            >
               Save
             </Button>
           </Flex>

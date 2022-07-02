@@ -36,7 +36,7 @@ export const LogOutButton = ({ label, handleClick }: LogOutProps) => (
   <Root>
     <Trigger asChild>
       <Button variant={'outline'} size={'2'} shape={'2'} css={{ ml: '$3' }}>
-        {label || 'Welcome'}
+        {label}
       </Button>
     </Trigger>
     <StyledContent>
