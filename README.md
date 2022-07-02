@@ -1,6 +1,6 @@
 # Getting started
 
-![Gary](src/assets/rivals/garyblue.png)
+[Gary](src/assets/rivals/garyblue.png)
 
 `yarn`
 
