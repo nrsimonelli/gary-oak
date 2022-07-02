@@ -168,17 +168,7 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
 
   return (
     <DialogRoot open={open} onOpenChange={handleOnOpenChange}>
-      <DialogBody
-        onPointerDownOutside={(event: { preventDefault: () => void }) => {
-          event.preventDefault()
-        }}
-        onInteractOutside={(event: { preventDefault: () => void }) => {
-          event.preventDefault()
-        }}
-        onEscapeKeyDown={(event: { preventDefault: () => void }) => {
-          event.preventDefault()
-        }}
-      >
+      <DialogBody>
         <Flex
           direction={'column'}
           align={'center'}

@@ -98,17 +98,7 @@ export const SwapPokemonDialog = ({
 
   return (
     <DialogRoot open={open} onOpenChange={handleClose}>
-      <DialogBody
-        onPointerDownOutside={(event: { preventDefault: () => void }) => {
-          event.preventDefault()
-        }}
-        onInteractOutside={(event: { preventDefault: () => void }) => {
-          event.preventDefault()
-        }}
-        onEscapeKeyDown={(event: { preventDefault: () => void }) => {
-          event.preventDefault()
-        }}
-      >
+      <DialogBody>
         <Flex
           direction={'column'}
           align={'center'}
@@ -127,7 +117,6 @@ export const SwapPokemonDialog = ({
               transition: 'all 300ms linear',
             }}
           >
-            {/* {JSON.stringify(activePokemon)} */}
             <Text variant={'h3'} css={{ py: '$3' }}>
               Manage your starters
             </Text>

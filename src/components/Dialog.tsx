@@ -1,3 +1,4 @@
+import React from 'react'
 import { styled } from '../stitches.config'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 
@@ -30,11 +31,29 @@ export const DialogRoot = DialogPrimitive.Root
 const DialogPortal = DialogPrimitive.Portal
 
 // TODO type children & props from welcomeDialog
-export const DialogBody = ({ children, ...props }) => {
+export const DialogBody = ({
+  children,
+  ...props
+}: {
+  children: React.ReactNode
+}) => {
   return (
     <DialogPortal>
       <DialogOverlay>
-        <DialogContent {...props}>{children}</DialogContent>
+        <DialogContent
+          onPointerDownOutside={(event: { preventDefault: () => void }) => {
+            event.preventDefault()
+          }}
+          onInteractOutside={(event: { preventDefault: () => void }) => {
+            event.preventDefault()
+          }}
+          onEscapeKeyDown={(event: { preventDefault: () => void }) => {
+            event.preventDefault()
+          }}
+          {...props}
+        >
+          {children}
+        </DialogContent>
       </DialogOverlay>
     </DialogPortal>
   )
