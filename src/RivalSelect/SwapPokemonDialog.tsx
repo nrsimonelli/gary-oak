@@ -7,7 +7,7 @@ import { Flex } from '../components/Flex'
 import { Img } from '../components/Img'
 import { Text } from '../components/Text'
 import { POKEBALL, POKEMON_LIST } from '../constants'
-import { setPlayer } from '../redux/slice/player-slice'
+import { player, setPlayer } from '../redux/slice/player-slice'
 import { useGetSpriteOnlyQuery } from '../redux/slice/pokemon-api'
 import { customSelectStyles } from '../SearchBar/SearchBar'
 import { AuthContext } from '../utils/auth'
@@ -27,7 +27,7 @@ export const SwapPokemonDialog = ({
   const dispatch = useAppDispatch()
   const { theme } = useContext(ThemeContext)
   const currentUser = useContext(AuthContext)
-  const playerData = useAppSelector((state) => state.player)
+  const playerData = useAppSelector(player)
   const [skip, setSkip] = useState(true)
   const [selectedValue, setSelectedValue] = useState('')
   const {

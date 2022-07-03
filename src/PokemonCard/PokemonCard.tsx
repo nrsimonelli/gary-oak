@@ -12,6 +12,7 @@ import {
 import { Img } from '../components/Img'
 import { LoopIcon } from '@radix-ui/react-icons'
 import { Button } from '../components/Button'
+import { selectedRivalName } from '../redux/slice/rival-slice'
 
 interface PokeCardProps {
   pokemon: string
@@ -34,7 +35,7 @@ export const PokemonCard = ({
   const [isFeatured, setIsFeatured] = useState(() => isStarter)
   const [initialized, setInitialized] = useState(false)
   const featureList = useAppSelector((state) => state.display.featuredPokemon)
-  const rival = useAppSelector((state) => state.rival.selectedRival)
+  const selectedRival = useAppSelector(selectedRivalName)
   const [easterEgg, setEasterEgg] = useState(false)
 
   const title = data?.name
@@ -43,7 +44,7 @@ export const PokemonCard = ({
   const isDisplayed = data && featureList.includes(data)
   const shouldRemove = isFeatured && !isDisplayed
 
-  const isPlayer = rival === 'player'
+  const isPlayer = selectedRival === 'player'
 
   // fills out featureList when user switches views
   useEffect(() => {

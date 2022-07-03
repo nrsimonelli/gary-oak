@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { RootState } from '..'
 import { Trainer } from '../../utils/docs'
 
 const initialState: Trainer = {
@@ -34,5 +35,6 @@ const playerSlice = createSlice({
   },
 })
 
+export const player = (state: RootState) => state.player
 export const { setPlayer, clearPlayer, addPokemon } = playerSlice.actions
 export default playerSlice.reducer

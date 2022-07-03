@@ -1,4 +1,5 @@
 import { AsyncThunk, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { RootState } from '..'
 import { getAllData, Trainer } from '../../utils/docs'
 import { getInitialRival, persistCurrentRival } from '../../utils/localStorage'
 
@@ -46,7 +47,6 @@ const rivalSlice = createSlice({
       })
       .addCase(fetchRivals.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        // Add any fetched posts to the array
         state.rivals = action.payload
       })
       .addCase(fetchRivals.rejected, (state, action) => {
@@ -56,5 +56,6 @@ const rivalSlice = createSlice({
   },
 })
 
+export const selectedRivalName = (state: RootState) => state.rival.selectedRival
 export const { setRival, setAllRivals } = rivalSlice.actions
 export default rivalSlice.reducer

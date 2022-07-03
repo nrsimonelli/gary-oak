@@ -13,13 +13,13 @@ import {
 import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import { GearIcon, GitHubLogoIcon, PersonIcon } from '@radix-ui/react-icons'
 import { getInitialRival } from '../utils/localStorage'
-import { setRival } from '../redux/slice/rival-slice'
+import { selectedRivalName, setRival } from '../redux/slice/rival-slice'
 import { clearFeaturedPokemon } from '../redux/slice/display-slice'
 
 export const LandingButtons = () => {
   const currentUser = useContext(AuthContext)
   const dispatch = useAppDispatch()
-  const selectedRival = useAppSelector((state) => state.rival.selectedRival)
+  const selectedRival = useAppSelector(selectedRivalName)
   const playerName = useAppSelector((state) => state.player.name)
 
   const nameLabel = playerName !== undefined ? playerName : 'Welcome'

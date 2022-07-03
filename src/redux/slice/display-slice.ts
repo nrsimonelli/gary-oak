@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { z } from 'zod'
 import { PokemonResponse } from './pokemon-api'
-import { Trainer, updatePlayerData } from '../../utils/docs'
 
 // add interface later
 interface InitialState {

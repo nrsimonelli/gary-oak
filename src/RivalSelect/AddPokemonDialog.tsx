@@ -6,7 +6,7 @@ import { DialogRoot, DialogBody } from '../components/Dialog'
 import { Flex } from '../components/Flex'
 import { Img } from '../components/Img'
 import { Text } from '../components/Text'
-import { addPokemon } from '../redux/slice/player-slice'
+import { addPokemon, player } from '../redux/slice/player-slice'
 import { useGetSpriteOnlyQuery } from '../redux/slice/pokemon-api'
 import { Timestamp } from 'firebase/firestore'
 import { AuthContext } from '../utils/auth'
@@ -26,7 +26,7 @@ export const AddPokemonDialog = ({
   const { theme } = useContext(ThemeContext)
   const currentUser = useContext(AuthContext)
 
-  const playerData = useAppSelector((state) => state.player)
+  const playerData = useAppSelector(player)
   const [skip, setSkip] = useState(true)
   const [selectedValue, setSelectedValue] = useState('')
   const { data, isLoading, isFetching, isUninitialized } =

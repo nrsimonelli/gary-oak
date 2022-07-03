@@ -8,7 +8,7 @@ import { Img } from '../components/Img'
 import { Skeleton } from '../components/Skeleton'
 import { Text } from '../components/Text'
 import { clearFeaturedPokemon } from '../redux/slice/display-slice'
-import { setRival } from '../redux/slice/rival-slice'
+import { selectedRivalName, setRival } from '../redux/slice/rival-slice'
 import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import { PokemonCard } from '../PokemonCard/PokemonCard'
 import { RadarGraph } from '../RadarGraph/RadarGraph'
@@ -16,14 +16,14 @@ import { PlusCircledIcon } from '@radix-ui/react-icons'
 import { styled } from '../stitches.config'
 import { SwapPokemonDialog } from './SwapPokemonDialog'
 import { AddPokemonDialog } from './AddPokemonDialog'
+import { player } from '../redux/slice/player-slice'
 
 export const RivalSelect = () => {
   const dispatch = useAppDispatch()
-  const playerData = useAppSelector((state) => state.player)
+  const playerData = useAppSelector(player)
   const rivalData = useAppSelector((state) => state.rival.rivals)
   const rivalStatus = useAppSelector((state) => state.rival.status)
-  const selectedRival = useAppSelector((state) => state.rival.selectedRival)
-
+  const selectedRival = useAppSelector(selectedRivalName)
   const [isLoading, setIsLoading] = useState(true)
   const [openDialog, setOpenDialog] = useState(false)
   const [swapDialog, setSwapDialog] = useState(false)
