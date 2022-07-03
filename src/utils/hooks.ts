@@ -23,7 +23,7 @@ export const useThrottle = (fn: Function, limit: number) => {
   const lastRan = useRef<number | undefined>(undefined)
 
   const throttledFunction = useCallback(
-    (...args) => {
+    (...args: any) => {
       if (!isReady) {
         return
       }

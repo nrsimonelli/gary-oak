@@ -29,6 +29,7 @@ export type ThemeContent = {
 
 export type ProviderContent = {
   initialTheme?: string
+  children: React.ReactNode
 }
 
 export const ThemeContext = createContext<ThemeContent>({

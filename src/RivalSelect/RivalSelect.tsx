@@ -9,7 +9,7 @@ import { Skeleton } from '../components/Skeleton'
 import { Text } from '../components/Text'
 import { clearFeaturedPokemon } from '../redux/slice/display-slice'
 import { setRival } from '../redux/slice/rival-slice'
-import { useAppDispatch, useAppSelector, useThrottle } from '../utils/hooks'
+import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import { PokemonCard } from '../PokemonCard/PokemonCard'
 import { RadarGraph } from '../RadarGraph/RadarGraph'
 import { PlusCircledIcon } from '@radix-ui/react-icons'
@@ -21,6 +21,7 @@ export const RivalSelect = () => {
   const dispatch = useAppDispatch()
   const playerData = useAppSelector((state) => state.player)
   const rivalData = useAppSelector((state) => state.rival.rivals)
+  const rivalStatus = useAppSelector((state) => state.rival.status)
   const selectedRival = useAppSelector((state) => state.rival.selectedRival)
 
   const [isLoading, setIsLoading] = useState(true)
@@ -93,92 +94,98 @@ export const RivalSelect = () => {
         activePokemon={activePokemon}
         handleClose={handleClose}
       />
-      <Flex direction={'row'} align={'center'} css={{ pb: '$3' }}>
-        {isLoading ? (
-          <Skeleton variant={'spriteContainer'} css={{ my: '$5' }} />
-        ) : (
-          <Img
-            src={data?.path || 'src/assets/error.png'}
-            css={{
-              height: '120px',
-              width: 'auto',
-              my: '$5',
-            }}
-          />
-        )}
-        <RadarGraph />
-      </Flex>
+      {rivalStatus === 'idle' || rivalStatus === 'loading' ? (
+        <Flex css={{ height: 300, pb: '$3' }}></Flex>
+      ) : (
+        <Flex direction={'row'} align={'center'} css={{ pb: '$3' }}>
+          {isLoading ? (
+            <Skeleton variant={'spriteContainer'} css={{ my: '$5' }} />
+          ) : (
+            <Img
+              src={data?.path || 'src/assets/error.png'}
+              css={{
+                height: '120px',
+                width: 'auto',
+                my: '$5',
+              }}
+            />
+          )}
+          <RadarGraph />
+        </Flex>
+      )}
       <Container
         variant={'2'}
         css={{
           py: '$3',
           bg: '$appBg2',
           borderRadius: '$3',
-          '@bp4': {
-            // mb: '$3',
-          },
+          mb: '$3',
         }}
       >
-        <Flex wrap={'wrap'} id='team'>
-          <Flex css={{ width: '$full' }}>
-            <Box
-              p={'2'}
-              css={{
-                bg: '$appBg1',
-                width: '$full',
-                borderRadius: '$3',
-                boxShadow: '$2',
-                mb: '$3',
-              }}
-            >
-              {rivalData.map((rival) => (
-                <FilterButton
-                  key={rival.id}
-                  value={rival.id}
-                  isSelected={selectedRival === rival.id}
-                  onClick={() => handleRivalClick(rival.id)}
-                  disabled={selectedRival === rival.id}
-                >
-                  <Text case={'capitalize'}>{rival.name}</Text>
-                </FilterButton>
-              ))}
-              {playerData.pokemon && playerData.pokemon.length > 0 && (
-                <FilterButton
-                  value={'player'}
-                  isSelected={selectedRival === 'player'}
-                  onClick={() => handleRivalClick('player')}
-                  disabled={selectedRival === 'player'}
-                >
-                  <Text case={'capitalize'}>{playerData.name}</Text>
-                </FilterButton>
-              )}
-            </Box>
+        {rivalStatus === 'idle' || rivalStatus === 'loading' ? (
+          <Flex id='team' css={{ width: '$full', height: 591 }}></Flex>
+        ) : (
+          <Flex wrap={'wrap'} id='team'>
+            <Flex css={{ width: '$full' }}>
+              <Box
+                p={'2'}
+                css={{
+                  bg: '$appBg1',
+                  width: '$full',
+                  borderRadius: '$3',
+                  boxShadow: '$2',
+                  mb: '$3',
+                }}
+              >
+                {rivalData.map((rival) => (
+                  <FilterButton
+                    key={rival.id}
+                    value={rival.id}
+                    isSelected={selectedRival === rival.id}
+                    onClick={() => handleRivalClick(rival.id)}
+                    disabled={selectedRival === rival.id}
+                  >
+                    <Text case={'capitalize'}>{rival.name}</Text>
+                  </FilterButton>
+                ))}
+                {playerData.pokemon && playerData.pokemon.length > 0 && (
+                  <FilterButton
+                    value={'player'}
+                    isSelected={selectedRival === 'player'}
+                    onClick={() => handleRivalClick('player')}
+                    disabled={selectedRival === 'player'}
+                  >
+                    <Text case={'capitalize'}>{playerData.name}</Text>
+                  </FilterButton>
+                )}
+              </Box>
+            </Flex>
+            {data?.pokemon?.map((mon, index) => (
+              <PokemonCard
+                key={mon.id + index}
+                pokemon={mon.name}
+                isStarter={Boolean(mon.isStarter)}
+                handleSwapClick={handleSwapClick}
+              />
+            ))}
+            {showAddMon && (
+              <PokemonContainer
+                p={'2'}
+                css={{
+                  height: '238px',
+                  width: '179px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Button onClick={() => setOpenDialog(true)}>
+                  <PlusCircle />
+                </Button>
+              </PokemonContainer>
+            )}
           </Flex>
-          {data?.pokemon?.map((mon, index) => (
-            <PokemonCard
-              key={mon.id + index}
-              pokemon={mon.name}
-              isStarter={Boolean(mon.isStarter)}
-              handleSwapClick={handleSwapClick}
-            />
-          ))}
-          {showAddMon && (
-            <PokemonContainer
-              p={'2'}
-              css={{
-                height: '238px',
-                width: '179px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Button onClick={() => setOpenDialog(true)}>
-                <PlusCircle />
-              </Button>
-            </PokemonContainer>
-          )}
-        </Flex>
+        )}
       </Container>
     </Flex>
   )

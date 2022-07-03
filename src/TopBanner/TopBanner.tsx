@@ -5,14 +5,16 @@ import { Text } from '../components/Text'
 import { ThemeToggle } from '../components/ThemeToggle'
 import { setPlayer } from '../redux/slice/player-slice'
 import { AuthContext } from '../utils/auth'
-import { fetchPlayerData } from '../utils/docs'
-import { useAppDispatch } from '../utils/hooks'
+import { fetchPlayerData, getAllData } from '../utils/docs'
+import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import { LandingDialog } from '../LandingDialog/LandingDialog'
+import { fetchRivals, setAllRivals } from '../redux/slice/rival-slice'
 
 export const TopBanner = () => {
   const currentUser = useContext(AuthContext)
   const [openWelcomeScreen, setOpenWelcomeScreen] = useState(false)
   const dispatch = useAppDispatch()
+  const rivalStatus = useAppSelector((state) => state.rival.status)
 
   useEffect(() => {
     if (currentUser) {
@@ -48,6 +50,12 @@ export const TopBanner = () => {
         console.log('error fetching data =>', err)
       })
   }
+
+  useEffect(() => {
+    if (rivalStatus === 'idle') {
+      dispatch(fetchRivals())
+    }
+  }, [rivalStatus])
 
   return (
     <Container variant={'responsive'} css={{ height: '60vh' }}>

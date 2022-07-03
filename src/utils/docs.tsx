@@ -1,4 +1,11 @@
-import { collection, getDocs, doc, setDoc, getDoc } from 'firebase/firestore'
+import {
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+  getDoc,
+  DocumentSnapshot,
+} from 'firebase/firestore'
 import { z } from 'zod'
 import { db } from './firestore'
 
