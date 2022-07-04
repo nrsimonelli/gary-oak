@@ -38,7 +38,7 @@ export const TopBanner = () => {
               data: {
                 id: currentUser.uid,
                 name: currentUser.displayName ?? '',
-                path: '',
+                path: 0,
                 pokemon: [],
               },
             })

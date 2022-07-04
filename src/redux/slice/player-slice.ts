@@ -5,7 +5,7 @@ import { Trainer } from '../../utils/docs'
 const initialState: Trainer = {
   id: '',
   name: '',
-  path: '',
+  path: 0,
   pokemon: [],
 }
 

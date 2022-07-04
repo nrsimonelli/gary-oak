@@ -1,11 +1,4 @@
-import {
-  collection,
-  getDocs,
-  doc,
-  setDoc,
-  getDoc,
-  DocumentSnapshot,
-} from 'firebase/firestore'
+import { collection, getDocs, doc, setDoc, getDoc } from 'firebase/firestore'
 import { z } from 'zod'
 import { db } from './firestore'
 
@@ -15,7 +8,7 @@ import { db } from './firestore'
 const Trainer = z.object({
   id: z.string(),
   name: z.string().optional(),
-  path: z.string().optional(),
+  path: z.number().optional(),
   pokemon: z.array(
     z.object({
       id: z.number(),

@@ -102,7 +102,7 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
     name: z.string().min(1, { message: 'Please enter your name' }).max(64, {
       message: 'Got any nicknames? Perhaps something a little shorter?',
     }),
-    path: z.string(),
+    path: z.number(),
     pokemon: z
       .array(
         z.object({
@@ -122,7 +122,7 @@ export const LandingDialog = ({ open, onOpenChange }: LandingDialogProps) => {
     })
     const profileData = {
       name: userName,
-      path: SPRITE_OPTIONS[spriteDisplay].path,
+      path: spriteDisplay,
       pokemon: teamData,
     }
     return mySchema.safeParse(profileData)

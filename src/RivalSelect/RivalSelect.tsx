@@ -17,6 +17,8 @@ import { styled } from '../stitches.config'
 import { SwapPokemonDialog } from './SwapPokemonDialog'
 import { AddPokemonDialog } from './AddPokemonDialog'
 import { player } from '../redux/slice/player-slice'
+import fallbackUrl from '../assets/error.png'
+import { SPRITE_OPTIONS } from '../constants'
 
 export const RivalSelect = () => {
   const dispatch = useAppDispatch()
@@ -102,7 +104,7 @@ export const RivalSelect = () => {
             <Skeleton variant={'spriteContainer'} css={{ my: '$5' }} />
           ) : (
             <Img
-              src={data?.path || 'src/assets/error.png'}
+              src={data.path ? SPRITE_OPTIONS[data.path].path : fallbackUrl}
               css={{
                 height: '120px',
                 width: 'auto',

@@ -13,26 +13,32 @@ export const THEMES = {
   YELLOW: 'yellow-theme',
 } as const
 
+import redUrl from './assets/themeIcons/red.png'
+import blueUrl from './assets/themeIcons/blue.png'
+import greenUrl from './assets/themeIcons/green.png'
+import whiteUrl from './assets/themeIcons/white.png'
+import goldUrl from './assets/themeIcons/gold.png'
+
 export const POKEBALL = [
   {
     theme: THEMES.DEFAULT,
-    path: 'src/assets/themeIcons/red.png',
+    path: redUrl,
   },
   {
     theme: THEMES.BLUE,
-    path: 'src/assets/themeIcons/blue.png',
+    path: blueUrl,
   },
   {
     theme: THEMES.GREEN,
-    path: 'src/assets/themeIcons/green.png',
+    path: greenUrl,
   },
   {
     theme: THEMES.DARK,
-    path: 'src/assets/themeIcons/white.png',
+    path: whiteUrl,
   },
   {
     theme: THEMES.YELLOW,
-    path: 'src/assets/themeIcons/gold.png',
+    path: goldUrl,
   },
 ] as const
 
@@ -878,22 +884,61 @@ export const POKEMON_LIST = NEW_USER.map((x, index) => ({
   name: x.name,
 }))
 
+import acefemaleUrl from './assets/spriteOptions/acefemale.png'
+import acemaleUrl from './assets/spriteOptions/acemale.png'
+import colressUrl from './assets/spriteOptions/colress.png'
+import cyclemaleUrl from './assets/spriteOptions/cyclemale.png'
+import depotUrl from './assets/spriteOptions/depot.png'
+import doctorfemaleUrl from './assets/spriteOptions/doctorfemale.png'
+import greenfemaleUrl from './assets/spriteOptions/greenfemale.png'
+import guitaristUrl from './assets/spriteOptions/guitarist.png'
+import parasolUrl from './assets/spriteOptions/parasol.png'
+import rangermaleUrl from './assets/spriteOptions/rangermale.png'
+import sabrinaUrl from './assets/spriteOptions/sabrina.png'
+import vetfemaleUrl from './assets/spriteOptions/vetfemale.png'
+import vetmaleUrl from './assets/spriteOptions/vetmale.png'
+import wakeUrl from './assets/spriteOptions/wake.png'
+
 export const SPRITE_OPTIONS = [
-  { id: 0, path: 'src/assets/spriteOptions/acefemale.png' },
-  { id: 1, path: 'src/assets/spriteOptions/acemale.png' },
-  { id: 2, path: 'src/assets/spriteOptions/colress.png' },
-  { id: 3, path: 'src/assets/spriteOptions/cyclemale.png' },
-  { id: 4, path: 'src/assets/spriteOptions/depot.png' },
-  { id: 5, path: 'src/assets/spriteOptions/doctorfemale.png' },
-  { id: 6, path: 'src/assets/spriteOptions/greenfemale.png' },
-  { id: 7, path: 'src/assets/spriteOptions/guitarist.png' },
-  { id: 8, path: 'src/assets/spriteOptions/parasol.png' },
-  { id: 9, path: 'src/assets/spriteOptions/rangermale.png' },
-  { id: 10, path: 'src/assets/spriteOptions/sabrina.png' },
-  { id: 11, path: 'src/assets/spriteOptions/vetfemale.png' },
-  { id: 12, path: 'src/assets/spriteOptions/vetmale.png' },
-  { id: 13, path: 'src/assets/spriteOptions/wake.png' },
+  { id: 0, path: acefemaleUrl },
+  { id: 1, path: acemaleUrl },
+  { id: 2, path: colressUrl },
+  { id: 3, path: cyclemaleUrl },
+  { id: 4, path: depotUrl },
+  { id: 5, path: doctorfemaleUrl },
+  { id: 6, path: greenfemaleUrl },
+  { id: 7, path: guitaristUrl },
+  { id: 8, path: parasolUrl },
+  { id: 9, path: rangermaleUrl },
+  { id: 10, path: sabrinaUrl },
+  { id: 11, path: vetfemaleUrl },
+  { id: 12, path: vetmaleUrl },
+  { id: 13, path: wakeUrl },
 ] as const
+
+import alderUrl from './assets/rivals/alder.png'
+import tBlueUrl from './assets/rivals/blue.png'
+import cynthiaUrl from './assets/rivals/cynthia.png'
+import gioUrl from './assets/rivals/gio.png'
+import irisUrl from './assets/rivals/iris.png'
+import lanceUrl from './assets/rivals/lance.png'
+import nUrl from './assets/rivals/n.png'
+import tRedUrl from './assets/rivals/red.png'
+import stevenUrl from './assets/rivals/steven.png'
+import wallaceUrl from './assets/rivals/wallace.png'
+
+export const RIVAL_OPTIONS = [
+  { id: 0, path: alderUrl },
+  { id: 1, path: tBlueUrl },
+  { id: 2, path: cynthiaUrl },
+  { id: 3, path: gioUrl },
+  { id: 4, path: irisUrl },
+  { id: 5, path: lanceUrl },
+  { id: 6, path: nUrl },
+  { id: 7, path: tRedUrl },
+  { id: 8, path: stevenUrl },
+  { id: 9, path: wallaceUrl },
+]
 
 export const STAT_MAX = {
   Hp: 255,
