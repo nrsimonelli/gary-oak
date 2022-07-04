@@ -68,17 +68,20 @@ export const SwapPokemonDialog = ({
     const swapIndex = playerData.pokemon.findIndex(
       (poke) => poke.name === activePokemon.label
     )
+
     const pokemonToAdd = {
       id: swapDisplay.id,
       name: swapDisplay.name,
       isStarter: false,
     }
+
     const updatedPokemon = playerData.pokemon.map((mon, index) => {
       if (index === swapIndex) {
         return pokemonToAdd
       }
       return mon
     })
+
     const playerUpdates: Partial<Trainer> = {
       pokemon: updatedPokemon,
       lastUpdated: Timestamp.now(),
@@ -88,7 +91,7 @@ export const SwapPokemonDialog = ({
       setPlayer({ data: { id: currentUser.uid, pokemon: updatedPokemon } })
     )
     updatePlayerData(currentUser.uid, playerUpdates)
-    handleClose()
+    handleCancel()
   }
 
   const displayMessage =

@@ -22,7 +22,7 @@ const StyledContent = styled(Content, {
 })
 
 interface LogOutProps {
-  label: string
+  label: string | undefined
   handleClick: () => void
 }
 
@@ -35,8 +35,13 @@ interface LogInProps {
 export const LogOutButton = ({ label, handleClick }: LogOutProps) => (
   <Root>
     <Trigger asChild>
-      <Button variant={'outline'} size={'2'} shape={'2'} css={{ ml: '$3' }}>
-        {label}
+      <Button
+        variant={'outline'}
+        size={'2'}
+        shape={'2'}
+        css={{ ml: '$3', textTransform: 'capitalize' }}
+      >
+        {label ?? 'Welcome'}
       </Button>
     </Trigger>
     <StyledContent>

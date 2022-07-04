@@ -39,9 +39,8 @@ export const RivalSelect = () => {
   const data = useMemo(() => {
     const result = rivalData.find((rival) => rival.id === selectedRival)
     const player = playerData
-    console.log('res', result)
     return result || player
-  }, [selectedRival, playerData])
+  }, [selectedRival, playerData, rivalStatus])
 
   const handleRivalClick = (tag: string) => {
     setIsLoading(true)
