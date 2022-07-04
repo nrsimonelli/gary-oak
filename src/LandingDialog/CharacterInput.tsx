@@ -5,6 +5,7 @@ import { Input } from '../components/Input'
 import { Text } from '../components/Text'
 import { SPRITE_OPTIONS } from '../constants'
 import { styled } from '../stitches.config'
+import fallbackUrl from '../assets/error.png'
 
 interface CharacterInputProps {
   handleChevronClick: (arg: number) => void
@@ -50,7 +51,7 @@ export const CharacterInput = ({
       <Flex direction={'row'} justify={'center'} align={'center'}>
         <ChevronLeftIcon onClick={() => handleChevronClick(-1)} />
         <Img
-          src={SPRITE_OPTIONS[spriteDisplay]?.path || 'src/assets/error.png'}
+          src={SPRITE_OPTIONS[spriteDisplay]?.path || fallbackUrl}
           css={{
             height: '120px',
             width: 'auto',

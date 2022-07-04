@@ -18,7 +18,7 @@ import { SwapPokemonDialog } from './SwapPokemonDialog'
 import { AddPokemonDialog } from './AddPokemonDialog'
 import { player } from '../redux/slice/player-slice'
 import fallbackUrl from '../assets/error.png'
-import { SPRITE_OPTIONS } from '../constants'
+import { RIVAL_OPTIONS, SPRITE_OPTIONS } from '../constants'
 
 export const RivalSelect = () => {
   const dispatch = useAppDispatch()
@@ -39,6 +39,7 @@ export const RivalSelect = () => {
   const data = useMemo(() => {
     const result = rivalData.find((rival) => rival.id === selectedRival)
     const player = playerData
+    console.log('res', result)
     return result || player
   }, [selectedRival, playerData])
 
@@ -56,7 +57,8 @@ export const RivalSelect = () => {
     }
   }, [selectedRival])
 
-  const showAddMon = selectedRival === 'player' && playerData.pokemon.length < 6
+  const isPlayer = selectedRival === 'player'
+  const showAddMon = isPlayer && playerData.pokemon.length < 6
 
   const PlusCircle = styled(PlusCircledIcon, {
     height: 60,
@@ -104,7 +106,13 @@ export const RivalSelect = () => {
             <Skeleton variant={'spriteContainer'} css={{ my: '$5' }} />
           ) : (
             <Img
-              src={data.path ? SPRITE_OPTIONS[data.path].path : fallbackUrl}
+              src={
+                !data.path
+                  ? fallbackUrl
+                  : isPlayer
+                  ? SPRITE_OPTIONS[data.path].path
+                  : RIVAL_OPTIONS[data.path].path
+              }
               css={{
                 height: '120px',
                 width: 'auto',
@@ -153,9 +161,9 @@ export const RivalSelect = () => {
                 {playerData.pokemon && playerData.pokemon.length > 0 && (
                   <FilterButton
                     value={'player'}
-                    isSelected={selectedRival === 'player'}
+                    isSelected={isPlayer}
                     onClick={() => handleRivalClick('player')}
-                    disabled={selectedRival === 'player'}
+                    disabled={isPlayer}
                   >
                     <Text case={'capitalize'}>{playerData.name}</Text>
                   </FilterButton>

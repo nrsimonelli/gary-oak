@@ -118,9 +118,8 @@ export const SwapPokemonDialog = ({
             }}
           >
             <Text variant={'h3'} css={{ py: '$3' }}>
-              Manage your starters
+              Manage your team
             </Text>
-            {JSON.stringify(isUninitialized)}
             <Flex
               direction={'column'}
               justify={'center'}
