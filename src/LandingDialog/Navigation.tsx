@@ -1,9 +1,8 @@
-import { PlusCircledIcon, PlusIcon } from '@radix-ui/react-icons'
+import { PlusIcon } from '@radix-ui/react-icons'
 import { styled } from '@stitches/react'
 import { Box } from '../components/Box'
 import { Button } from '../components/Button'
 import { Flex } from '../components/Flex'
-import { Text } from '../components/Text'
 
 interface NavigationProps {
   handleAdd: () => void

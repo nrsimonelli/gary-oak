@@ -1,4 +1,4 @@
-import { AsyncThunk, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '..'
 import { getAllData, Trainer } from '../../utils/docs'
 import { getInitialRival, persistCurrentRival } from '../../utils/localStorage'

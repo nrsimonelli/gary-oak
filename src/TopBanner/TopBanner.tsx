@@ -5,10 +5,10 @@ import { Text } from '../components/Text'
 import { ThemeToggle } from '../components/ThemeToggle'
 import { setPlayer } from '../redux/slice/player-slice'
 import { AuthContext } from '../utils/auth'
-import { fetchPlayerData, getAllData } from '../utils/docs'
+import { fetchPlayerData } from '../utils/docs'
 import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import { LandingDialog } from '../LandingDialog/LandingDialog'
-import { fetchRivals, setAllRivals } from '../redux/slice/rival-slice'
+import { fetchRivals } from '../redux/slice/rival-slice'
 
 export const TopBanner = () => {
   const currentUser = useContext(AuthContext)
