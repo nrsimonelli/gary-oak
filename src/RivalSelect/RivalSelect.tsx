@@ -57,6 +57,7 @@ export const RivalSelect = () => {
   }, [selectedRival])
 
   const isPlayer = selectedRival === 'player'
+  const isPathValid = typeof data.path !== 'undefined'
   const showAddMon = isPlayer && playerData.pokemon.length < 6
 
   const PlusCircle = styled(PlusCircledIcon, {
@@ -86,6 +87,16 @@ export const RivalSelect = () => {
     setSwapDialog(true)
   }
 
+  const getImage = (): string => {
+    if (typeof data.path === 'undefined') {
+      return fallbackUrl
+    }
+    if (isPlayer) {
+      return SPRITE_OPTIONS[data.path].path
+    }
+    return RIVAL_OPTIONS[data.path].path
+  }
+
   return (
     <Flex direction={'column'} align={'center'} justify={'start'}>
       <AddPokemonDialog
@@ -105,13 +116,7 @@ export const RivalSelect = () => {
             <Skeleton variant={'spriteContainer'} css={{ my: '$5' }} />
           ) : (
             <Img
-              src={
-                !data.path
-                  ? fallbackUrl
-                  : isPlayer
-                  ? SPRITE_OPTIONS[data.path].path
-                  : RIVAL_OPTIONS[data.path].path
-              }
+              src={getImage()}
               css={{
                 height: '120px',
                 width: 'auto',

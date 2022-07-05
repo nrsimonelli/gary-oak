@@ -4,6 +4,7 @@ import { Text } from '../components/Text'
 import { SPRITE_OPTIONS } from '../constants'
 import { useGetPokemonByNameQuery } from '../redux/slice/pokemon-api'
 import { SelectState } from './LandingDialog'
+import fallbackUrl from '../assets/error.png'
 
 const SpriteDisplay = ({ pokemon }: { pokemon: string }) => {
   const { data, isFetching, isLoading, isError } =
@@ -65,7 +66,7 @@ export const ConfirmInput = ({
           css={{ py: '$3' }}
         >
           <Img
-            src={SPRITE_OPTIONS[spriteDisplay]?.path || 'src/assets/error.png'}
+            src={SPRITE_OPTIONS[spriteDisplay]?.path || fallbackUrl}
             css={{
               height: '120px',
               width: 'auto',
