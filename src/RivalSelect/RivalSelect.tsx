@@ -57,7 +57,6 @@ export const RivalSelect = () => {
   }, [selectedRival])
 
   const isPlayer = selectedRival === 'player'
-  const isPathValid = typeof data.path !== 'undefined'
   const showAddMon = isPlayer && playerData.pokemon.length < 6
 
   const PlusCircle = styled(PlusCircledIcon, {
@@ -111,7 +110,11 @@ export const RivalSelect = () => {
       {rivalStatus === 'idle' || rivalStatus === 'loading' ? (
         <Flex css={{ height: 300, pb: '$3' }}></Flex>
       ) : (
-        <Flex direction={'row'} align={'center'} css={{ pb: '$3' }}>
+        <Flex
+          direction={'column'}
+          align={'center'}
+          css={{ pb: '$3', '@bp1': { flexDirection: 'row' } }}
+        >
           {isLoading ? (
             <Skeleton variant={'spriteContainer'} css={{ my: '$5' }} />
           ) : (
