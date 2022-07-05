@@ -12,12 +12,6 @@ const getInitialTheme = () => {
     if (typeof storedPrefs === 'string') {
       return storedPrefs
     }
-
-    const userMedia = window.matchMedia('(prefers-color-scheme: dark)')
-    if (userMedia.matches) {
-      // default goes here...
-      return darkTheme
-    }
   }
   return 'default-theme'
 }

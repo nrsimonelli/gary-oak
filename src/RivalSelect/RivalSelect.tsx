@@ -151,6 +151,16 @@ export const RivalSelect = () => {
                   mb: '$3',
                 }}
               >
+                {playerData.pokemon && playerData.pokemon.length > 0 && (
+                  <FilterButton
+                    value={'player'}
+                    isSelected={isPlayer}
+                    onClick={() => handleRivalClick('player')}
+                    disabled={isPlayer}
+                  >
+                    <Text case={'capitalize'}>{playerData.name}</Text>
+                  </FilterButton>
+                )}
                 {rivalData.map((rival) => (
                   <FilterButton
                     key={rival.id}
@@ -162,16 +172,6 @@ export const RivalSelect = () => {
                     <Text case={'capitalize'}>{rival.name}</Text>
                   </FilterButton>
                 ))}
-                {playerData.pokemon && playerData.pokemon.length > 0 && (
-                  <FilterButton
-                    value={'player'}
-                    isSelected={isPlayer}
-                    onClick={() => handleRivalClick('player')}
-                    disabled={isPlayer}
-                  >
-                    <Text case={'capitalize'}>{playerData.name}</Text>
-                  </FilterButton>
-                )}
               </Box>
             </Flex>
             {data?.pokemon?.map((mon, index) => (
